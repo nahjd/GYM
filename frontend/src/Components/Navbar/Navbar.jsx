@@ -30,7 +30,7 @@ function Navbar() {
                 </ul>
                 <div className="rightnav">
                     <IoPersonOutline />
-                    <Link to="/basket" ><BiBasket style={{ color: "black" }} /></Link>
+                    <Link to="/basket" ><BiBasket style={{ color: "white" }} /></Link>
                 </div>
             </div>
         </div>

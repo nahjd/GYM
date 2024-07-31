@@ -17,7 +17,7 @@
   top: 0;
   gap: 35px;
   padding: 10px;
-  background-color: gray;
+  //   background-color: gray;
   // border: 1px solid red;
 
   .leftnav {
@@ -31,7 +31,7 @@
     display: none;
     font-size: 2rem;
     cursor: pointer;
-    color: black;
+    color: white;
   }
 
   .nav-links {
@@ -44,7 +44,7 @@
       a {
         text-decoration: none;
         cursor: pointer;
-        color: black;
+        color: white;
         font-size: 1rem;
         font-family: "Poppins", sans-serif;
         font-weight: 500;
@@ -70,7 +70,7 @@
   }
 
   .rightnav {
-    color: black;
+    color: white;
     display: flex;
     gap: 20px;
     font-size: 1.5rem;
@@ -79,7 +79,7 @@
   @media (max-width: 630px) {
     .menu-icon {
       // background-color: black;
-      color: black;
+      color: white;
       display: block;
       position: absolute;
       top: 10px;

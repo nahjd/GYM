@@ -12,6 +12,7 @@ import { GrFavorite } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 import { FaShoppingBasket } from "react-icons/fa";
 import "./Menu.scss"
+
 const Menu = () => {
     const basket = useSelector((state) => state.gym.basket)
     const wishlist = useSelector((state) => state.gym.wishlist)
@@ -26,6 +27,7 @@ const Menu = () => {
     console.log(basket);
     return (
         <>
+
             <div className="cards">
                 {data && data.map((item) => (
                     <Card sx={{ maxWidth: "100%" }}>

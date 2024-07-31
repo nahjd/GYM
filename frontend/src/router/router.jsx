@@ -7,7 +7,7 @@ import Pages from "./../Pages/Add/Add"
 
 export const routes = [
     {
-        // path: "/",
+        path: "/",
         element: <UseRoot />,
         children: [
             {
