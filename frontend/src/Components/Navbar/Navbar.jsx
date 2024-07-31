@@ -25,7 +25,7 @@ function Navbar() {
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/portfolio">PORTFOLIO</Link></li>
                     <li><Link to="/shop">SHOP</Link></li>
-                    <li>  <Link to="/basket" ><BiBasket style={{ color: "black", fontSize: "25px" }} /></Link></li>
+                    <li>  <Link to="/basket" ><BiBasket style={{ color: "white", fontSize: "25px" }} /></Link></li>
 
                 </ul>
                 <div className="rightnav">
