@@ -1,0 +1,27 @@
+.cards {
+  //   border: 1px solid red;
+  display: flex;
+  width: 100%;
+  gap: 45px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 430px) {
+  .cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 250px) {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+    height: 100px;
+  }
+}

@@ -1,0 +1,121 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  // border: 1px solid black;
+}
+
+.Navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  gap: 35px;
+  padding: 10px;
+  background-color: gray;
+  // border: 1px solid red;
+
+  .leftnav {
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .menu-icon {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: black;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+
+    li {
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: italic;
+      }
+      :hover {
+        border-bottom: 5px solid yellow;
+        animation: slideIn 2s infinite;
+      }
+
+      @keyframes slideIn {
+        0% {
+          transform: translateX(-50%);
+        }
+        50% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(50%);
+        }
+      }
+    }
+  }
+
+  .rightnav {
+    color: black;
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 630px) {
+    .menu-icon {
+      // background-color: black;
+      color: black;
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      &.open {
+        display: flex;
+      }
+
+      li {
+        text-align: center;
+
+        a {
+          color: black; // Menü link renkleri
+        }
+      }
+    }
+
+    .rightnav {
+      display: none;
+    }
+  }
+}
