@@ -17,6 +17,14 @@ export const fetchPost = createAsyncThunk("data/fetchPost", async (item) => {
   const response = await axios.post(`https://nemm-1.onrender.com/nem`, item);
   return response.data;
 });
+const saveBasketToLocalStorage = (basket) => {
+  localStorage.setItem("basket", JSON.stringify(basket));
+};
+
+const loadBasketFromLocalStorage = () => {
+  const basket = localStorage.getItem("basket");
+  return basket ? JSON.parse(basket) : [];
+};
 
 export const userSlice = createSlice({
   name: "data",
@@ -57,6 +65,7 @@ export const userSlice = createSlice({
           { ...action.payload, quantity: 1 },
         ];
       }
+      saveBasketToLocalStorage(state.basket);
       console.log(state.basket);
     },
 
@@ -67,6 +76,7 @@ export const userSlice = createSlice({
       state.basket = current(state.basket).map((item, index) =>
         index === findIndex ? { ...item, quantity: item.quantity + 1 } : item
       );
+      saveBasketToLocalStorage(state.basket);
     },
 
     decreaseBasket: (state, action) => {
@@ -76,12 +86,14 @@ export const userSlice = createSlice({
       state.basket = current(state.basket).map((item, index) =>
         index === findIndex ? { ...item, quantity: item.quantity - 1 } : item
       );
+      saveBasketToLocalStorage(state.basket);
     },
 
     deleteBasket: (state, action) => {
       state.basket = state.basket.filter(
         (item) => item._id != action.payload._id
       );
+      saveBasketToLocalStorage(state.basket);
     },
   },
   extraReducers: (builder) => {
