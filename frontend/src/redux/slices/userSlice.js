@@ -93,9 +93,14 @@ export const userSlice = createSlice({
       state.basket = state.basket.filter(
         (item) => item._id != action.payload._id
       );
+
       saveBasketToLocalStorage(state.basket);
     },
+    emptycartIteam: (state, action) => {
+      state.carts = [];
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -147,6 +152,7 @@ export const {
   decreaseBasket,
   increaseBasket,
   deleteBasket,
+  emptycartIteam,
 } = userSlice.actions;
 
 export default userSlice.reducer;
