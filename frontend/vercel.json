@@ -1,3 +1,0 @@
-{
-  "rewrites": [{ "source": "/basket", "destination": "/path/to/basket/page" }]
-}
