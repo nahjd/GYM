@@ -30,9 +30,8 @@ const Menu = () => {
 
             <div className="cards">
                 {data && data.map((item) => (
-                    <Card sx={{ maxWidth: "100%" }}>
-                        <CardMedia
-                            sx={{ height: 545, width: 540 }}
+                    <Card className='card'  >
+                        <CardMedia className='one'
                             image={item.image}
                             title="green iguana"
                         />
@@ -44,7 +43,7 @@ const Menu = () => {
                                 {item.price}
                             </Typography>
                         </CardContent>
-                        <CardActions>
+                        <CardActions className='buttons'>
                             <Button onClick={() => {
                                 dispatch(addWishlist(item))
                             }}
