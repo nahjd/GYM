@@ -48,7 +48,7 @@ const Basket = () => {
                 </thead>
                 <tbody>
                     {basket && basket.map((item) => (
-                        <tr key={item.id}>
+                        <tr key={item._id}>
                             <td>
                                 <button className='prdct-delete'
                                     onClick={() => dispatch(deleteBasket(item))}
