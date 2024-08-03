@@ -3,8 +3,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-export const fetchData = createAsyncThunk("data/fetchData", async () => {
+export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   const response = await axios.get(`https://nemm-1.onrender.com/nem`);
+  return response.data;
+});
+
+export const getLoginUser = createAsyncThunk("getLogin", async () => {
+  const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
   return response.data;
 });
 
@@ -27,9 +32,9 @@ const loadBasketFromLocalStorage = () => {
 };
 
 export const userSlice = createSlice({
-  name: "data",
+  name: "users",
   initialState: {
-    data: [],
+    users: [],
     basket: [],
     wishlist: [],
   },
@@ -103,14 +108,14 @@ export const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, (state) => {
+      .addCase(getAllUsers.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchData.fulfilled, (state, action) => {
+      .addCase(getAllUsers.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

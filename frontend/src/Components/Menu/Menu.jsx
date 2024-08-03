@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addBasket, addWishlist, fetchData } from './../../redux/slices/userSlice'
+import { addBasket, addWishlist, getAllUsers } from './../../redux/slices/userSlice'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -19,7 +19,7 @@ const Menu = () => {
     const data = useSelector((state) => state.gym.data)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchData())
+        dispatch(getAllUsers())
     }, [dispatch])
 
     // console.log(data);

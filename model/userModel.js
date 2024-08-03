@@ -6,6 +6,9 @@ const UserSchema = mongoose.Schema(
     name: String,
     price: String,
     image: String,
+    username: String,
+    password: String,
+    email: String,
   },
   {
     collection: "nem",

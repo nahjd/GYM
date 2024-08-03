@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData, increaseBasket, decreaseBasket, deleteBasket, addBasket, emptycartIteam } from '../../redux/slices/userSlice';
+import { getAllUsers, increaseBasket, decreaseBasket, deleteBasket, addBasket, emptycartIteam } from '../../redux/slices/userSlice';
 import toast from 'react-hot-toast';
 import { loadStripe } from '@stripe/stripe-js';
 import Navbar from '../../Components/Navbar/Navbar';
@@ -25,7 +25,7 @@ const Basket = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchData());
+        dispatch(getAllUsers());
     }, [dispatch]);
 
     useEffect(() => {
