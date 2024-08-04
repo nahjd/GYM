@@ -29,7 +29,7 @@ function Navbar() {
 
                 </ul>
                 <div className="rightnav">
-                    <IoPersonOutline />
+
 
                 </div>
             </div>

@@ -1,11 +1,36 @@
 const User = require("./../model/userModel");
 
-const getAlldata = async (req, res) => {
+const getAllUser = async (req, res) => {
   try {
     const found = await User.find({});
     res.send(found);
   } catch (error) {
     res.status(500).send({ error: "Error fetching data" });
+  }
+};
+const getUserById = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const user = await UserModel.findOne({ _id: id });
+  res.send(user);
+};
+
+const login = async (req, res) => {
+  const user = req.body;
+
+  try {
+    let findUser = await UserModel.findOne({
+      username: user.username,
+      password: user.password,
+    });
+    if (findUser) {
+      res.status(200).send(findUser._id);
+    } else {
+      res.status(201).send("Invalid Username or Password!");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
   }
 };
 
@@ -32,7 +57,9 @@ const getAllpost = async (req, res) => {
 };
 
 module.exports = {
-  getAlldata,
+  getAllUser,
+  getUserById,
+  login,
   getAlldelete,
   getAllpost,
 };

@@ -12,6 +12,7 @@ const Basket = () => {
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQuantity, setTotalQuantity] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedBasket = JSON.parse(localStorage.getItem('basket')) || [];
@@ -25,7 +26,12 @@ const Basket = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(getAllUsers());
+        dispatch(getAllUsers())
+            .then(() => setLoading(false))
+            .catch((error) => {
+                console.error('Failed to fetch users', error);
+                setLoading(false);
+            });
     }, [dispatch]);
 
     useEffect(() => {
@@ -90,8 +96,15 @@ const Basket = () => {
         }
     };
 
-    return (
+    if (loading) {
+        return (
+            <div className="loader-container">
+                <div className="loader"></div>
+            </div>
+        );
+    }
 
+    return (
         <>
             <Navbar />
             <div className="tables">
@@ -145,7 +158,6 @@ const Basket = () => {
                 </table>
             </div>
         </>
-
     );
 };
 

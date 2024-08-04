@@ -4,26 +4,26 @@ import Home from "../Pages/Home/Home"
 import Wishlist from "../Pages/Wishlist/Wishlist"
 import UseRoot from "../Components/useRoot/index"
 import Pages from "./../Pages/Add/Add"
-import Login from "../Pages/Login/Login"
-import Register from "../Pages/Register/Register"
+// import Login from "../Pages/Login/Login"
+// import Register from "../Pages/Register/Register"
 
 export const routes = [
     {
         path: "/",
         element: <UseRoot />,
         children: [
+            // {
+            //     path: "/",
+            //     element: <Login />
+            // },
             {
                 path: "/",
-                element: <Login />
-            },
-            {
-                path: "/home",
                 element: <Home />
             },
-            {
-                path: "/register",
-                element: <Register />
-            },
+            // {
+            //     path: "/register",
+            //     element: <Register />
+            // },
 
             {
                 path: "/pages",
