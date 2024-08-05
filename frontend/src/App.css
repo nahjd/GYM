@@ -3,3 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
+.drawer {
+  background-color: #2b3f54 !important;
+}

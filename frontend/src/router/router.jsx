@@ -4,6 +4,9 @@ import Home from "../Pages/Home/Home"
 import Wishlist from "../Pages/Wishlist/Wishlist"
 import UseRoot from "../Components/useRoot/index"
 import Pages from "./../Pages/Add/Add"
+import AdminRoot from "../Pages/Admin/AdminRoot"
+import Dashboard from "../Pages/Admin/Dashboard"
+import AddUser from "../Pages/Admin/AddUser"
 // import Login from "../Pages/Login/Login"
 // import Register from "../Pages/Register/Register"
 
@@ -40,6 +43,27 @@ export const routes = [
             {
                 path: "/:id",
                 element: <Detail />
+            },
+        ]
+    }, {
+        path: "/admin",
+        element: <AdminRoot />,
+        children: [
+            {
+                path: "/admin",
+                element: <Dashboard />
+            },
+            {
+                path: "/adminUsers",
+                element: <AddUser />
+            },
+            {
+                path: "/admin/:id",
+                element: <Detail />
+            },
+            {
+                path: "/adminNot",
+                element: <Notification />
             },
         ]
     }

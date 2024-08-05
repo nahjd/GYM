@@ -3,15 +3,31 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
+export const getAllUsers = createAsyncThunk("data/getAllUsers", async () => {
   const response = await axios.get(`https://nemm-1.onrender.com/nem`);
   return response.data;
 });
 
-export const getLoginUser = createAsyncThunk("getLogin", async () => {
-  const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
-  return response.data;
-});
+// export const getLoginUser = createAsyncThunk("getLogin", async () => {
+//   const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
+//   return response.data;
+// });
+
+// export const adminUsers = createAsyncThunk(
+//   "data/adminUsers",
+//   async (newItem) => {
+//     try {
+//       const response = await axios.post(
+//         `https://nemm-1.onrender.com/nem/`,
+//         newItem
+//       );
+//       return response.data;
+//     } catch (error) {
+//       throw new Error("Failed to add");
+//     }
+//   }
+// );
+// console.log("hello");
 
 export const fetchDelete = createAsyncThunk("data/fetchDelete", async (id) => {
   const response = await axios.delete(`https://nemm-1.onrender.com/nem` + id);
