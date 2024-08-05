@@ -72,29 +72,29 @@ const Basket = () => {
         }
     }, [basket]);
 
-    const emptyCart = () => {
-        dispatch(emptycartIteam());
-        toast.success("Your Cart is Empty");
-    };
+    // const emptyCart = () => {
+    //     dispatch(emptycartIteam());
+    //     toast.success("Your Cart is Empty");
+    // };
 
-    const makePayment = async () => {
-        const stripe = await loadStripe("ENTER_YOUR_PUBLISHABLE_KEY");
+    // const makePayment = async () => {
+    //     const stripe = await loadStripe("ENTER_YOUR_PUBLISHABLE_KEY");
 
-        const body = { products: basket };
-        const headers = { "Content-Type": "application/json" };
-        const response = await fetch("https://nemm-1.onrender.com/nem", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body)
-        });
+    //     const body = { products: basket };
+    //     const headers = { "Content-Type": "application/json" };
+    //     const response = await fetch("https://nemm-1.onrender.com/nem", {
+    //         method: "POST",
+    //         headers: headers,
+    //         body: JSON.stringify(body)
+    //     });
 
-        const session = await response.json();
-        const result = await stripe.redirectToCheckout({ sessionId: session.id });
+    //     const session = await response.json();
+    //     const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
-        if (result.error) {
-            console.error(result.error);
-        }
-    };
+    //     if (result.error) {
+    //         console.error(result.error);
+    //     }
+    // };
 
     if (loading) {
         return (
@@ -152,7 +152,7 @@ const Basket = () => {
                             <th colSpan={2}>&nbsp;</th>
                             <th>Items In Cart <span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalQuantity}</span></th>
                             <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>$ {totalPrice}</span></th>
-                            <th className='text-right'><button className='btn btn-success' onClick={makePayment} type='button'>Checkout</button></th>
+                            <th className='text-right'><button className='btn btn-success' type='button'>Checkout</button></th>
                         </tr>
                     </tfoot>
                 </table>
