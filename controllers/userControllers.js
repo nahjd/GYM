@@ -15,24 +15,24 @@ const getUserById = async (req, res) => {
   res.send(user);
 };
 
-const login = async (req, res) => {
-  const user = req.body;
+// const login = async (req, res) => {
+//   const user = req.body;
 
-  try {
-    let findUser = await UserModel.findOne({
-      username: user.username,
-      password: user.password,
-    });
-    if (findUser) {
-      res.status(200).send(findUser._id);
-    } else {
-      res.status(201).send("Invalid Username or Password!");
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-};
+//   try {
+//     let findUser = await UserModel.findOne({
+//       username: user.username,
+//       password: user.password,
+//     });
+//     if (findUser) {
+//       res.status(200).send(findUser._id);
+//     } else {
+//       res.status(201).send("Invalid Username or Password!");
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Internal Server Error");
+//   }
+// };
 
 const getAlldelete = async (req, res) => {
   try {
@@ -59,7 +59,7 @@ const getAllpost = async (req, res) => {
 module.exports = {
   getAllUser,
   getUserById,
-  login,
+  // login,
   getAlldelete,
   getAllpost,
 };
