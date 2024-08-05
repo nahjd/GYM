@@ -3,7 +3,7 @@ import Detail from "../Pages/Detail/Detail"
 import Home from "../Pages/Home/Home"
 import Wishlist from "../Pages/Wishlist/Wishlist"
 import UseRoot from "../Components/useRoot/index"
-import Pages from "./../Pages/Add/Add"
+
 import AdminRoot from "../Pages/Admin/AdminRoot"
 import Dashboard from "../Pages/Admin/Dashboard"
 import AddUser from "../Pages/Admin/AddUser"
@@ -28,10 +28,7 @@ export const routes = [
             //     element: <Register />
             // },
 
-            {
-                path: "/pages",
-                element: <Pages />
-            },
+
             {
                 path: "/wishlist",
                 element: <Wishlist />
