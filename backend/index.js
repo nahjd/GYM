@@ -3,9 +3,9 @@ const app = express();
 const port = process.env.MONGODB_URI || 3030;
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const Router = require("./router/router");
+const Router = require("../router/router");
 require("dotenv").config();
-require("./config/db");
+require("../config/db");
 
 app.use(cors());
 app.use(bodyParser.json());
