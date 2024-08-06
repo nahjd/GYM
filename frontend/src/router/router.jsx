@@ -3,10 +3,12 @@ import Detail from "../Pages/Detail/Detail"
 import Home from "../Pages/Home/Home"
 import Wishlist from "../Pages/Wishlist/Wishlist"
 import UseRoot from "../Components/useRoot/index"
-
+import Notification from "../Pages/Admin/Notfication"
 import AdminRoot from "../Pages/Admin/AdminRoot"
 import Dashboard from "../Pages/Admin/Dashboard"
 import AddUser from "../Pages/Admin/AddUser"
+import AdminNavbar from "../Pages/Admin/Navbar"
+// import EditUser from "../Pages/Admin/AdminEdit"
 // import Login from "../Pages/Login/Login"
 // import Register from "../Pages/Register/Register"
 
@@ -47,11 +49,11 @@ export const routes = [
         element: <AdminRoot />,
         children: [
             {
-                path: "/admin",
+                path: "/admin/admin",
                 element: <Dashboard />
             },
             {
-                path: "/adminUsers",
+                path: "/admin/adminUsers",
                 element: <AddUser />
             },
             {
@@ -59,9 +61,18 @@ export const routes = [
                 element: <Detail />
             },
             {
-                path: "/adminNot",
+                path: "/admin/adminNot",
                 element: <Notification />
             },
+            {
+                path: "/admin/navbar",
+                element: <AdminNavbar />
+            },
+            // {
+            //     path: "/admin/edit/:id",
+            //     element: <EditUser />
+            // },
+
         ]
     }
 ]

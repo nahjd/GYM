@@ -90,27 +90,39 @@
     @media only screen and (max-width: 1200px) {
       flex-direction: column;
       .video,
-      .beigepart {
+      .play-icon {
         width: 100%;
         padding-bottom: 56.25%;
       }
       .video {
         order: 1;
       }
-      .beigepart {
+      .play-icon {
         padding-bottom: 0;
         height: 40vh;
         margin-bottom: 1%;
       }
     }
     @media only screen and (max-width: 768px) {
-      .beigepart {
-        height: 50vh;
+      .play-icon {
+        // border: 1px solid blue;
+      }
+      .icon-animation {
+        // display: none;
+        width: 10px;
+        height: 10px;
+        font-size: 510pxpx;
       }
     }
     @media only screen and (max-width: 425px) {
-      .beigepart {
-        height: 70vh;
+      .play-icon {
+        // border: 1px solid red;
+      }
+      .icon-animation {
+        // display: none;
+        width: 10px;
+        height: 10px;
+        font-size: 5px;
       }
     }
   }

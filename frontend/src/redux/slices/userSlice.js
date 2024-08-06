@@ -8,26 +8,48 @@ export const getAllUsers = createAsyncThunk("data/getAllUsers", async () => {
   return response.data;
 });
 
+export const getUserById = createAsyncThunk("users/getUserById", async (id) => {
+  const response = await axios.get(`https://nemm-1.onrender.com/nem/${id}`);
+  return response.data;
+});
+
+export const updateUser = createAsyncThunk("users/updateUser", async (user) => {
+  const response = await axios.put(
+    `https://nemm-1.onrender.com/nem/${user.id}`,
+    user
+  );
+  return response.data;
+});
+
 // export const getLoginUser = createAsyncThunk("getLogin", async () => {
 //   const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
 //   return response.data;
 // });
 
-// export const adminUsers = createAsyncThunk(
-//   "data/adminUsers",
-//   async (newItem) => {
-//     try {
-//       const response = await axios.post(
-//         `https://nemm-1.onrender.com/nem/`,
-//         newItem
-//       );
-//       return response.data;
-//     } catch (error) {
-//       throw new Error("Failed to add");
-//     }
-//   }
-// );
-// console.log("hello");
+export const addUser = createAsyncThunk("data/addUser", async (newItem) => {
+  try {
+    const response = await axios.post(
+      `https://nemm-1.onrender.com/nem/`,
+      newItem
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to add");
+  }
+});
+console.log("salam");
+
+export const deleteUsers = createAsyncThunk("news/deleteUsers", async (id) => {
+  try {
+    await axios.delete(`https://nemm-1.onrender.com/nem/${id}`);
+    const response = await axios.get("https://nemm-1.onrender.com/nem/");
+    console.log(response.data);
+    const updatedUsers = response.data.filter((item) => item.id !== id);
+    return updatedUsers;
+  } catch (error) {
+    throw new Error("Failed to delete");
+  }
+});
 
 export const fetchDelete = createAsyncThunk("data/fetchDelete", async (id) => {
   const response = await axios.delete(`https://nemm-1.onrender.com/nem` + id);
@@ -53,6 +75,8 @@ export const userSlice = createSlice({
     users: [],
     basket: [],
     wishlist: [],
+    status: null,
+    error: null,
   },
   reducers: {
     addWishlist: (state, action) => {
@@ -162,6 +186,23 @@ export const userSlice = createSlice({
       .addCase(fetchPost.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      });
+    builder
+      .addCase(getUserById.fulfilled, (state, action) => {
+        const index = state.data.findIndex(
+          (user) => user._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.data[index] = action.payload;
+        }
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const index = state.data.findIndex(
+          (user) => user._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.data[index] = action.payload;
+        }
       });
   },
 });
