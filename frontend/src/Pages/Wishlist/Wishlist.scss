@@ -1,25 +1,50 @@
-.cards {
+.cardw {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 45px;
   flex-wrap: wrap;
+  // margin-top: 80px;
+}
+.wishlistbody {
+  width: 100%;
+  height: 100vh;
+  background: -webkit-linear-gradient(
+    90deg,
+    #00000a,
+    #00000a,
+    #18273f,
+    #00000a,
+    #000000
+  );
+  background: linear-gradient(
+    90deg,
+    #00000a,
+    #00000a,
+    #18273f,
+    #00000a,
+    #000000
+  );
+}
+
+.wishcard {
+  // border: 1px solid red;
   margin-top: 80px;
 }
-body {
-}
 @media screen and (max-width: 630px) {
-  .cards {
+  .cardw {
     width: 100%;
   }
 }
 
 @media screen and (max-width: 300px) {
-  .cards {
+  .cardw {
     width: 100%;
   }
 }
 
 @media screen and (max-width: 260px) {
-  .cards {
+  .cardw {
     display: flex;
     justify-content: center;
     align-items: center;

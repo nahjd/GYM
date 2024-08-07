@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.section1 {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 95px;
+  align-items: center;
+  width: 100%;
+  max-width: 1660px;
+  padding: 0 20px;
+}
+
+.bmi-section {
+  width: 100%;
+}
+
+.bmi-section h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: white;
+  font-size: 3.5rem;
+}
+
+.bmi-section table {
+  color: white;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bmi-section th,
+.bmi-section td {
+  color: white;
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+
+.bmi-section p {
+  color: white;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-section h2 {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: white;
+  font-size: 3.1rem;
+}
+
+form {
+  width: 100%;
+}
+
+.biriki {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10px;
+  //   border: 1px solid red;
+}
+
+.ucdord {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10px;
+}
+.form-group {
+  //   display: flex;
+  //   flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid gray;
+}
+
+#height,
+#weight,
+#sex {
+  width: 33%;
+}
+#age {
+  margin-left: 25px;
+  width: 33%;
+}
+
+#activity {
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+
+#sex option,
+#activity option {
+  background-color: black;
+  color: white;
+}
+
+.result {
+  background-color: yellow;
+  color: black;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.result span {
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  padding: 15px 30px;
+  font-size: 15px;
+  background-color: #eefb13;
+  border-radius: 3px;
+  text-decoration: none;
+  border: none;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  transition: background-color 0.2s ease-in-out 0.2s,
+    color 0.2s ease-in-out 0.2s;
+}
+
+@media screen and (max-width: 800px) {
+  .bmi-section {
+    h1 {
+      font-size: 28px;
+    }
+  }
+  .form-section {
+    // border: 1px solid red;
+    margin-top: 40px;
+    h2 {
+      font-size: 25px;
+    }
+  }
+  button {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .container2 {
+    display: flex;
+    flex-direction: column;
+    .bmi-section {
+      margin-top: 10px;
+      p {
+        margin-top: 15px;
+        color: white;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .container2 {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  .bmi-section {
+    // border: 1px solid red;
+  }
+  .form-section {
+    margin-top: 25px;
+    // border: 1px solid yellow;
+    button {
+      position: relative;
+      font-size: 10px;
+      padding: 5px;
+    }
+    #sex {
+      background-color: black;
+    }
+    #result {
+      position: relative;
+      left: 50%;
+      bottom: 50px;
+
+      width: 50%;
+      font-size: 10px;
+      padding: 5px;
+    }
+  }
+}

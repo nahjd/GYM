@@ -106,57 +106,59 @@ const Basket = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="tables">
-                <table className='table cart-table mb-0 table-responsive-sm'>
-                    <caption>A basic table example with a caption</caption>
-                    <thead>
-                        <tr>
-                            <th>Action</th>
-                            <th>Product</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th className='qty'>Quantity</th>
-                            <th className='text-right'><span id="amount" className='amount'>Total Amount</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {basket && basket.map((item) => (
-                            <tr key={item._id}>
-                                <td>
-                                    <button className='prdct-delete' onClick={() => dispatch(deleteBasket(item))}>
-                                        <i className='fa fa-trash-alt'></i>
-                                    </button>
-                                </td>
-                                <td><div className='product-img'><img src={item.image} alt={item.name} /></div></td>
-                                <td><div className='product-name'><p>{item.name}</p></div></td>
-                                <td>{item.price}</td>
-                                <td>
-                                    <div className="prdct-qty-container">
-                                        <button className='prdct-qty-btn' type='button' onClick={() => item.quantity > 1 ? dispatch(decreaseBasket(item)) : null}>
-                                            <i className='fa fa-minus'></i>
-                                        </button>
-                                        <input type="text" className='qty-input-box' value={item.quantity} disabled />
-                                        <button className='prdct-qty-btn' type='button' onClick={() => dispatch(increaseBasket(item))}>
-                                            <i className='fa fa-plus'></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td className='text-right'>${parseFloat(item.price) * item.quantity} </td>
+            <div className="bastable">
+                <div className="tables">
+                    <table className='table cart-table mb-0 table-responsive-sm'>
+                        {/* <caption>A basic table example with a caption</caption> */}
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Product</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th className='qty'>Quantity</th>
+                                <th className='text-right'><span id="amount" className='amount'>Total Amount</span></th>
                             </tr>
-                        ))}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th colSpan={2}>&nbsp;</th>
-                            <th>Items In Cart <span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalQuantity}</span></th>
-                            <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>$ {totalPrice}</span></th>
-                            <th className='text-right'><button className='btn btn-success' type='button'>Checkout</button></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </thead>
+                        <tbody>
+                            {basket && basket.map((item) => (
+                                <tr key={item._id}>
+                                    <td>
+                                        <button className='prdct-delete' onClick={() => dispatch(deleteBasket(item))}>
+                                            <i className='fa fa-trash-alt'></i>
+                                        </button>
+                                    </td>
+                                    <td><div className='product-img'><img src={item.image} alt={item.name} /></div></td>
+                                    <td><div className='product-name'><p>{item.name}</p></div></td>
+                                    <td>{item.price}</td>
+                                    <td>
+                                        <div className="prdct-qty-container">
+                                            <button className='prdct-qty-btn' type='button' onClick={() => item.quantity > 1 ? dispatch(decreaseBasket(item)) : null}>
+                                                <i className='fa fa-minus'></i>
+                                            </button>
+                                            <input type="text" className='qty-input-box' value={item.quantity} disabled />
+                                            <button className='prdct-qty-btn' type='button' onClick={() => dispatch(increaseBasket(item))}>
+                                                <i className='fa fa-plus'></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td className='text-right'>${parseFloat(item.price) * item.quantity} </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colSpan={2}>&nbsp;</th>
+                                <th>Items In Cart <span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalQuantity}</span></th>
+                                <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>$ {totalPrice}</span></th>
+                                <th className='text-right'><button className='btn btn-success' type='button'>Checkout</button></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
+
         </>
     );
 };

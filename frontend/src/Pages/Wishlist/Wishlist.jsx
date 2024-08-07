@@ -22,43 +22,46 @@ const Wishlist = () => {
     console.log(wishlist);
     return (
         <>
-            <div className="cards">
-                {wishlist && wishlist.map((item, i) => {
-                    return (
-                        <>
-                            <Card
-                                key={item.id}
-                                sx={{ maxWidth: "100%" }}>
+            <div className="wishlistbody">
+                <div className="cardw">
+                    {wishlist && wishlist.map((item, i) => {
+                        return (
+                            <>
+                                <Card className='wishcard'
+                                    key={item.id}
+                                    sx={{ maxWidth: "100%" }}>
 
-                                <CardMedia
-                                    sx={{ height: 340, width: 340 }}
-                                    image={item.image}
-                                    title="green iguana"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        {item.price}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {item.name}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button
-                                        onClick={() => {
-                                            dispatch(deleteWishlist(item))
-                                        }}
-                                        size="small"><MdDelete style={{ color: "red", fontSize: "25px" }} />
-                                    </Button>
-                                    <Button style={{ color: "black" }} onClick={() => {
-                                        dispatch(addBasket(item))
-                                    }} size="small">Basket</Button>
+                                    <CardMedia
+                                        sx={{ height: 340, width: 340 }}
+                                        image={item.image}
+                                        title="green iguana"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {item.price}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {item.name}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                            onClick={() => {
+                                                dispatch(deleteWishlist(item))
+                                            }}
+                                            size="small"><MdDelete style={{ color: "red", fontSize: "25px" }} />
+                                        </Button>
+                                        <Button style={{ color: "black" }} onClick={() => {
+                                            dispatch(addBasket(item))
+                                        }} size="small">Basket</Button>
 
-                                </CardActions>
-                            </Card>
-                        </>
-                    )
-                })}
+                                    </CardActions>
+                                </Card>
+                            </>
+                        )
+                    })}
+
+                </div>
 
             </div>
 
