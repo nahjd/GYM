@@ -136,3 +136,82 @@ button:hover {
     }
   }
 }
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.text1 {
+  width: 60%;
+  font-size: 35px;
+  opacity: 0;
+}
+
+.text1.animate {
+  animation: slide-in 1s ease-out;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet {
+  background: #000;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.swiper-pagination-bullet:hover {
+  background: #eefb13;
+  transform: rotate(360deg);
+}
+
+.swiper-pagination-bullet:hover::before {
+  border-color: #eefb13;
+  transform: rotate(-360deg);
+}
+
+.swiper-pagination-bullet-active {
+  background: #eefb13;
+}
+
+.swiper-pagination-bullet:hover span {
+  color: white;
+}
+
+.swiper-pagination-bullet span {
+  display: none;
+}
+
+.swiper-pagination-bullet:hover span {
+  display: inline;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #000;
+}
