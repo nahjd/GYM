@@ -8,7 +8,7 @@
 .footer {
   background-color: #232323;
   width: 100%;
-  height: 90vh;
+  // height: 90vh;
   // border: 1px solid red;
 }
 .upfooter {
@@ -58,4 +58,402 @@
   width: 90%;
   margin-left: 5%;
   margin-top: 1%;
+}
+
+.footerss {
+  display: flex;
+  padding: 0px 15px 0 15px;
+  gap: 125px;
+  justify-content: space-between;
+  align-items: center;
+  // border: 10px solid green;
+}
+
+.footleft {
+  margin-left: 55px;
+  width: 40%;
+  // border: 5px solid red;
+
+  h1,
+  pre {
+    color: white;
+  }
+  span,
+  p {
+    color: gray;
+  }
+}
+
+.footicon {
+  width: 70%;
+  display: flex;
+  gap: 20px;
+  justify-content: start;
+
+  align-items: center;
+  // border: 3px solid blue;
+  li {
+    text-decoration: none;
+  }
+  a {
+    color: white;
+  }
+}
+
+.footright {
+  width: 100%;
+  // border: 3px solid black;
+}
+
+.footbir {
+  width: 100%;
+  display: flex;
+  gap: 15em;
+  justify-content: center;
+  align-items: center;
+  // border: 3px solid blue;
+}
+
+.footiki {
+  width: 100%;
+  display: flex;
+  gap: 15em;
+  justify-content: center;
+  align-items: center;
+  // border: 3px solid blue;
+}
+
+.newyork {
+  text-align: end;
+  // width: 20%;
+  // border: 7px solid red;
+}
+
+.losangeles {
+  text-align: end;
+  width: 21%;
+  // border: 7px solid red;
+}
+.mondayfriday {
+  // text-align: center;
+  // border: 10px solid black;
+  width: 35%;
+}
+
+.weekends {
+  // text-align: center;
+  width: 42%;
+  // border: 10px solid black;
+}
+
+#nmlw {
+  h1 {
+    color: white;
+  }
+  span,
+  pre {
+    color: gray;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .upfooter {
+    display: flex;
+    gap: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+  .upleft {
+    img {
+      width: 65px;
+      // border: 1px solid black;
+    }
+  }
+  .upright {
+    margin-top: 25px;
+    h1:hover {
+      cursor: pointer;
+      .squad {
+        width: 100%;
+      }
+    }
+  }
+
+  .footbir {
+    flex-direction: column;
+    gap: 0;
+    // border: 10px solid blue;
+  }
+  .footiki {
+    // border: 10px solid red;
+    gap: 0;
+    flex-direction: column;
+  }
+  .newyork {
+    text-align: center;
+    width: 100%;
+  }
+  .mondayfriday {
+    text-align: center;
+    width: 100%;
+  }
+  .losangeles {
+    width: 100%;
+    // border: 1px solid black;
+    text-align: center;
+  }
+  .weekends {
+    width: 100%;
+    text-align: center;
+  }
+  .footicon {
+    font-size: 29px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .upfooter {
+    display: flex;
+    gap: 40%;
+    justify-content: center;
+    align-items: center;
+  }
+  .upleft {
+    img {
+      width: 45px;
+      // border: 1px solid black;
+    }
+  }
+  .upright {
+    margin-top: 25px;
+    h1:hover {
+      cursor: pointer;
+      .squad {
+        width: 100%;
+      }
+    }
+  }
+  .footicon {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .upfooter {
+    display: flex;
+    gap: 20%;
+    justify-content: center;
+    align-items: center;
+  }
+  .upleft {
+    img {
+      width: 50px;
+      // border: 1px solid black;
+    }
+  }
+  .upright {
+    margin-top: 25px;
+    h1:hover {
+      cursor: pointer;
+      .squad {
+        width: 100%;
+      }
+    }
+  }
+  .footbir {
+    flex-direction: column;
+    gap: 0;
+    // border: 10px solid blue;
+  }
+  .footerss {
+    gap: 35px;
+    flex-direction: column;
+  }
+  .footiki {
+    // border: 10px solid red;
+
+    flex-direction: column;
+  }
+
+  .newyork {
+    text-align: start;
+    width: 100%;
+  }
+  .mondayfriday {
+    text-align: start;
+    width: 100%;
+  }
+  .losangeles {
+    width: 100%;
+    // border: 1px solid black;
+    text-align: start;
+  }
+  .weekends {
+    width: 100%;
+    text-align: start;
+  }
+  .footleft {
+    margin: 0;
+    pad: 0;
+    width: 100%;
+    // border: 1px solid blue;
+  }
+  .footicon {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .upfooter {
+    width: 100%;
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    font-size: 21px;
+  }
+  .upright {
+    margin-top: 25px;
+    h1:hover {
+      cursor: pointer;
+      .squad {
+        width: 100%;
+      }
+    }
+    h1 {
+      width: 100%;
+      font-size: 25px;
+    }
+  }
+  .upleft {
+    img {
+      width: 30px;
+      // border: 1px solid black;
+    }
+  }
+
+  .footbir {
+    flex-direction: column;
+    gap: 0;
+    // border: 10px solid blue;
+  }
+  .footerss {
+    gap: 35px;
+    flex-direction: column;
+  }
+  .footiki {
+    // border: 10px solid red;
+
+    flex-direction: column;
+  }
+
+  .newyork {
+    text-align: start;
+    width: 100%;
+  }
+  .mondayfriday {
+    text-align: start;
+    width: 100%;
+  }
+  .losangeles {
+    width: 100%;
+    // border: 1px solid black;
+    text-align: start;
+  }
+  .weekends {
+    width: 100%;
+    text-align: start;
+  }
+  .footleft {
+    margin: 0;
+    pad: 0;
+    width: 100%;
+    // border: 1px solid blue;
+  }
+  .footicon {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 230px) {
+  .upfooter {
+    display: flex;
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  .footleft {
+    h1 {
+      font-size: 15px;
+    }
+  }
+  .upright {
+    margin-top: 25px;
+    h1:hover {
+      cursor: pointer;
+      .squad {
+        width: 100%;
+      }
+    }
+    h1 {
+      width: 100%;
+      font-size: 17px;
+    }
+    .squad {
+      width: 100%;
+      width: 5px;
+      height: 5px;
+    }
+  }
+  .upleft {
+    img {
+      width: 30px;
+      // border: 1px solid black;
+    }
+  }
+
+  .footbir {
+    flex-direction: column;
+    gap: 0;
+    // border: 10px solid blue;
+  }
+  .footerss {
+    gap: 35px;
+    flex-direction: column;
+  }
+  .footiki {
+    // border: 10px solid red;
+
+    flex-direction: column;
+  }
+
+  .newyork {
+    text-align: start;
+    width: 100%;
+  }
+  .mondayfriday {
+    text-align: start;
+    width: 100%;
+  }
+  .losangeles {
+    width: 100%;
+    // border: 1px solid black;
+    text-align: start;
+  }
+  .weekends {
+    width: 100%;
+    text-align: start;
+  }
+  .footleft {
+    margin: 0;
+    pad: 0;
+    width: 100%;
+    // border: 1px solid blue;
+  }
+  .footicon {
+    font-size: 17px;
+  }
 }
