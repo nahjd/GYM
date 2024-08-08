@@ -8,7 +8,7 @@ import "./Home.scss"
 function Home() {
     return (
         <>
-            <Navbar />
+
             <Hero />
             <Menu />
             <Video />

@@ -29,8 +29,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/slices/userSlice";
 
-
-
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -112,8 +110,6 @@ export default function Dashboard() {
         console.log("Users data:", users);
         console.log("Filtered users:", filteredUsers);
     }, [users, searchh]);
-
-
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -311,7 +307,11 @@ export default function Dashboard() {
                                                     <TableCell>Email</TableCell>
                                                     <TableCell>Password</TableCell>
                                                     <TableCell>Username</TableCell>
-                                                    {/* <TableCell>Edit</TableCell> */}
+                                                    <TableCell>Description</TableCell>
+                                                    <TableCell>Favourite</TableCell>
+                                                    <TableCell>Rate</TableCell>
+                                                    <TableCell>Edit</TableCell>
+
                                                     <TableCell>Delete</TableCell>
                                                 </TableRow>
                                             </TableHead>
@@ -338,23 +338,13 @@ export default function Dashboard() {
                                                         <TableCell>{user.email}</TableCell>
                                                         <TableCell>{user.password}</TableCell>
                                                         <TableCell>{user.username}</TableCell>
-                                                        {/* <TableCell>
-                                                            <Link
-                                                                to={`/admin/edit/${user._id}`}
-                                                                style={{
-                                                                    color: "black",
-                                                                    textDecoration: "none",
-                                                                    display: "inline-block",
-                                                                    padding: "10px",
-                                                                    borderRadius: "5px",
-                                                                    backgroundColor: "yellow",
-                                                                    textAlign: "center",
-                                                                }}
-                                                            >
-                                                                Edit
-                                                            </Link>
+                                                        <TableCell>{user.description}</TableCell>
+                                                        <TableCell>{user.favourite}</TableCell>
+                                                        <TableCell>{user.rate}</TableCell>
+                                                        {/* <TableCell><Link to={`/admin/edit/${user._id}`} style={{ color: "blue", textDecoration: "none" }}>
+                                                            Edit
+                                                        </Link></TableCell> */}
 
-                                                        </TableCell> */}
 
                                                         <TableCell>
                                                             <button

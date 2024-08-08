@@ -81,6 +81,9 @@ export default function AddUser() {
     const [image, setImage] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const [favourite, setFavourite] = React.useState("");
+    const [rate, setRate] = React.useState("");
 
     const handleAddUser = (e) => {
         e.preventDefault();
@@ -91,6 +94,9 @@ export default function AddUser() {
             image: image,
             email: email,
             password: password,
+            description: description,
+            favourite: favourite,
+            rate: rate,
         };
 
         dispatch(addUser(userObj));
@@ -100,6 +106,9 @@ export default function AddUser() {
         setImage("");
         setEmail("");
         setPassword("");
+        setDescription("");
+        setFavourite("");
+        setRate("");
     };
 
     return (
@@ -283,6 +292,27 @@ export default function AddUser() {
                                                 variant="outlined"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
+                                                fullWidth
+                                            />
+                                            <TextField
+                                                label="Description"
+                                                variant="outlined"
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                                fullWidth
+                                            />
+                                            <TextField
+                                                label="Favourite"
+                                                variant="outlined"
+                                                value={favourite}
+                                                onChange={(e) => setFavourite(e.target.value)}
+                                                fullWidth
+                                            />
+                                            <TextField
+                                                label="Rate"
+                                                variant="outlined"
+                                                value={rate}
+                                                onChange={(e) => setRate(e.target.value)}
                                                 fullWidth
                                             />
                                             <Button

@@ -13,13 +13,20 @@ export const getUserById = createAsyncThunk("users/getUserById", async (id) => {
   return response.data;
 });
 
-export const updateUser = createAsyncThunk("users/updateUser", async (user) => {
-  const response = await axios.put(
-    `https://nemm-1.onrender.com/nem/${user.id}`,
-    user
-  );
-  return response.data;
-});
+// export const updateUser = createAsyncThunk(
+//   "users/updateUser",
+//   async ({ id, ...data }, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.put(
+//         `https://nemm-1.onrender.com/nem/${id}`,
+//         data
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 
 // export const getLoginUser = createAsyncThunk("getLogin", async () => {
 //   const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
@@ -167,7 +174,7 @@ export const userSlice = createSlice({
       .addCase(fetchDelete.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = state.data.filter(
-          (item) => item._id != action.payload._id
+          (item) => item._id !== action.payload._id
         );
       })
       .addCase(fetchDelete.rejected, (state, action) => {
@@ -187,23 +194,25 @@ export const userSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
-    builder
-      .addCase(getUserById.fulfilled, (state, action) => {
-        const index = state.data.findIndex(
-          (user) => user._id === action.payload._id
-        );
-        if (index !== -1) {
-          state.data[index] = action.payload;
-        }
-      })
-      .addCase(updateUser.fulfilled, (state, action) => {
-        const index = state.data.findIndex(
-          (user) => user._id === action.payload._id
-        );
-        if (index !== -1) {
-          state.data[index] = action.payload;
-        }
-      });
+    // builder
+    //   .addCase(updateUser.pending, (state) => {
+    //     state.loading = true;
+    //   })
+    //   .addCase(updateUser.fulfilled, (state, action) => {
+    //     state.loading = false;
+    //     const updatedUser = action.payload;
+    //     const index = state.users.findIndex(
+    //       (user) => user._id === updatedUser._id
+    //     );
+    //     if (index !== -1) {
+    //       state.users[index] = updatedUser; // Kullanıcıyı güncelle
+    //     }
+    //     state.selectedUser = updatedUser; // Seçilen kullanıcıyı güncelle (isteğe bağlı)
+    //   })
+    //   .addCase(updateUser.rejected, (state, action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+    //   });
   },
 });
 

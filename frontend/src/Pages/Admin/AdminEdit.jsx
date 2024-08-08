@@ -1,144 +1,81 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getUserById, updateUser } from '../../redux/slices/userSlice';
-// import { TextField, Button, Container, Paper } from '@mui/material';
-// import "./AdminEdit.scss"
+// // EditUser.js
+// import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { getUserById, updateUser } from "../../redux/slices/userSlice";
 
 // export default function EditUser() {
 //     const { id } = useParams();
-//     const dispatch = useDispatch();
 //     const navigate = useNavigate();
-//     const user = useSelector(state => state.gym.users.find(user => user.id === id));
-//     const [name, setName] = useState('');
-//     const [price, setPrice] = useState('');
-//     const [image, setImage] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [username, setUsername] = useState('');
-//     const [error, setError] = useState('');
-//     const [loading, setLoading] = useState(true);
+//     const dispatch = useDispatch();
+//     const user = useSelector((state) => state.gym);
+//     const [formData, setFormData] = useState({
+//         name: "",
+//         price: "",
+//         image: "",
+//         email: "",
+//         password: "",
+//         username: "",
+//         description: "",
+//         favourite: "",
+//         rate: "",
+//     });
+
+//     useEffect(() => {
+//         dispatch(getUserById(id));
+//     }, [dispatch, id]);
 
 //     useEffect(() => {
 //         if (user) {
-//             setName(user.name);
-//             setPrice(user.price);
-//             setImage(user.image);
-//             setEmail(user.email);
-//             setPassword(user.password);
-//             setUsername(user.username);
-//             setLoading(false);
-//         } else {
-//             dispatch(getUserById(id))
-//                 .unwrap()
-//                 .then((userData) => {
-//                     console.log("User data fetched:", userData);
-//                     setName(userData.name);
-//                     setPrice(userData.price);
-//                     setImage(userData.image);
-//                     setEmail(userData.email);
-//                     setPassword(userData.password);
-//                     setUsername(userData.username);
-//                     setLoading(false);
-//                 })
-//                 .catch(error => {
-//                     console.error("Failed to load user details:", error);
-//                     setLoading(false);
-//                     setError("Failed to load user details");
-//                 });
+//             setFormData({
+//                 name: user.name || "",
+//                 price: user.price || "",
+//                 image: user.image || "",
+//                 email: user.email || "",
+//                 password: user.password || "",
+//                 username: user.username || "",
+//                 description: user.description || "",
+//                 favourite: user.favourite || "",
+//                 rate: user.rate || "",
+//             });
 //         }
-//     }, [dispatch, id, user]);
+//     }, [user]);
 
-//     const handleUpdate = (e) => {
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setFormData((prevData) => ({
+//             ...prevData,
+//             [name]: value,
+//         }));
+//     };
+
+//     const handleSubmit = (e) => {
 //         e.preventDefault();
-//         const updatedUser = { _id: id, name, price, image, email, password, username };
-//         dispatch(updateUser(updatedUser))
+//         dispatch(updateUser({ id, ...formData }))
 //             .unwrap()
-//             .then(() => navigate('/admin/admin'))
-//             .catch(error => {
-//                 console.error("Failed to update user:", error);
-//                 setError("Failed to update user");
+//             .then(() => {
+//                 navigate("/admin/admin");
+//             })
+//             .catch((error) => {
+//                 console.error("Error updating user:", error);
 //             });
 //     };
 
-//     if (loading) {
-//         return (
-//             <div className="loader-container">
-//                 <div className="loader"></div>
-//             </div>
-//         )
-
-//     }
-
 //     return (
-//         <Container maxWidth="sm">
-//             <Paper style={{ padding: 20 }}>
-//                 <form onSubmit={handleUpdate}>
-//                     <TextField
-//                         label="Name"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={name}
-//                         onChange={(e) => setName(e.target.value)}
-//                         required
-//                     />
-//                     <TextField
-//                         label="Price"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={price}
-//                         onChange={(e) => setPrice(e.target.value)}
-//                         required
-//                     />
-//                     <TextField
-//                         label="Image URL"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={image}
-//                         onChange={(e) => setImage(e.target.value)}
-//                         required
-//                     />
-//                     <TextField
-//                         label="Email"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={email}
-//                         onChange={(e) => setEmail(e.target.value)}
-//                         required
-//                     />
-//                     <TextField
-//                         label="Password"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={password}
-//                         onChange={(e) => setPassword(e.target.value)}
-//                         required
-//                     />
-//                     <TextField
-//                         label="Username"
-//                         variant="outlined"
-//                         fullWidth
-//                         margin="normal"
-//                         value={username}
-//                         onChange={(e) => setUsername(e.target.value)}
-//                         required
-//                     />
-//                     {error && <p style={{ color: 'red' }}>{error}</p>}
-//                     <Button
-//                         type="submit"
-//                         variant="contained"
-//                         color="primary"
-//                         style={{ marginTop: 20 }}
-//                     >
-//                         Update User
-//                     </Button>
-//                 </form>
-//             </Paper>
-//         </Container>
+//         <div>
+//             <h2>Edit User</h2>
+//             <form onSubmit={handleSubmit}>
+//                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
+//                 <input type="text" name="price" value={formData.price} onChange={handleChange} placeholder="Price" />
+//                 <input type="text" name="image" value={formData.image} onChange={handleChange} placeholder="Image URL" />
+//                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+//                 <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" />
+//                 <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" />
+//                 <input type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Description" />
+//                 <input type="text" name="favourite" value={formData.favourite} onChange={handleChange} placeholder="Favourite" />
+//                 <input type="text" name="rate" value={formData.rate} onChange={handleChange} placeholder="Rate" />
+//                 <button type="submit">Update User</button>
+//             </form>
+//         </div>
 //     );
 // }
