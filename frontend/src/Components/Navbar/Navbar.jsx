@@ -32,8 +32,8 @@ function Navbar() {
                 </ul>
                 <div className="rightnav">
 
-                    <Link to="/admin/admin">
-                        <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link>
+                    {/* <Link to="/admin/admin">
+                        <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link> */}
                 </div>
             </div>
         </div>
