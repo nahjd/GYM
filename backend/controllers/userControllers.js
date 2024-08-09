@@ -1,8 +1,8 @@
-const User = require("./../model/userModel");
+const UserModel = require("./../model/userModel");
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await UserModel.find({});
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Error fetching users" });
@@ -11,60 +11,81 @@ const getAllUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const id = req.params.id;
-  try {
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ error: "Error fetching user" });
-  }
+  console.log(id);
+  const user = await UserModel.findOne({ _id: id });
+  res.send(user);
 };
 
-const getAlldelete = async (req, res) => {
+const deleteUser = async (req, res) => {
   const id = req.params.id;
+  let deletesUser = await UserModel.findByIdAndDelete(id);
+  console.log(deletesUser);
+  res.send(deletesUser);
+};
+
+const postUser = async (req, res) => {
+  const user = req.body;
   try {
-    const deletedUser = await User.findByIdAndDelete(id);
-    if (!deletedUser) {
-      return res.status(404).json({ error: "User not found" });
+    let findUserUsername = await UserModel.findOne({ username: user.username });
+    let findUserEmail = await UserModel.findOne({ email: user.email });
+    if (findUserUsername) {
+      res.status(201).send("This username already used!");
     }
-    res.status(200).json(deletedUser);
-  } catch (error) {
-    res.status(500).json({ error: "Error deleting user" });
+    if (findUserEmail) {
+      res.status(201).send("This email already used!");
+    }
+    {
+      let newUser = new UserModel(req.body);
+      await newUser.save();
+      res.status(200).send({
+        message: "Register Succesfully!",
+      });
+    }
+  } catch {
+    (err) => {
+      console.log(err);
+      return err;
+    };
   }
 };
 
-const getAllpost = async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    await newUser.save();
-    res.status(201).json(newUser); // 201 Created for new resources
-  } catch (error) {
-    res.status(400).json({ error: "Error creating user" });
-  }
-};
+const login = async (req, res) => {
+  const user = req.body;
 
-const getAllput = async (req, res) => {
-  const id = req.params.id;
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true, // Ensures data is validated before updating
+    let findUser = await adminModel.findOne({
+      username: user.username,
+      password: user.password,
     });
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
+    if (findUser) {
+      res.status(200).send(findUser._id);
+    } else {
+      res.status(201).send("Invalid Username or Password!");
     }
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
   }
+};
+
+const patchUser = async (req, res) => {
+  const id = req.params.id;
+  let updateUser = await UserModel.findOneAndUpdate({ _id: id }, req.body);
+  res.send(updateUser);
+};
+
+const putUser = async (req, res) => {
+  const id = req.params.id;
+  let replaceUser = await UserModel.replaceOne({ _id: id }, req.body);
+  res.send(replaceUser);
 };
 
 module.exports = {
   getAllUser,
   getUserById,
-  getAlldelete,
-  getAllpost,
-  getAllput,
+  deleteUser,
+  postUser,
+  patchUser,
+  putUser,
+  login,
 };

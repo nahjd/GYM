@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, increaseBasket, decreaseBasket, deleteBasket, addBasket, emptycartIteam } from '../../redux/slices/userSlice';
+import { getAllUsers, increaseBasket, decreaseBasket, deleteBasket, addBasket, } from '../../redux/slices/userSlice';
 import toast from 'react-hot-toast';
 import { loadStripe } from '@stripe/stripe-js';
 import Navbar from '../../Components/Navbar/Navbar';
@@ -151,7 +151,7 @@ const Basket = () => {
                                 <th>&nbsp;</th>
                                 <th colSpan={2}>&nbsp;</th>
                                 <th>Items In Cart <span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalQuantity}</span></th>
-                                <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>$ {totalPrice}</span></th>
+                                <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalPrice}</span></th>
                                 <th className='text-right'><button className='btn btn-success' type='button'>Checkout</button></th>
                             </tr>
                         </tfoot>

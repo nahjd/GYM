@@ -1,42 +1,26 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllUsers = createAsyncThunk("data/getAllUsers", async () => {
+export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   const response = await axios.get(`https://nemm-1.onrender.com/nem`);
+  console.log("API RESPONSE", response.data);
   return response.data;
 });
 
-export const getUserById = createAsyncThunk("users/getUserById", async (id) => {
+export const getLoginUser = createAsyncThunk("getLogin", async (_id) => {
+  const response = await axios.get(`https://nemm-1.onrender.com/nem/${_id}`);
+  return response.data;
+});
+
+export const getUserById = createAsyncThunk("getUserById", async (id) => {
   const response = await axios.get(`https://nemm-1.onrender.com/nem/${id}`);
   return response.data;
 });
 
-// export const updateUser = createAsyncThunk(
-//   "users/updateUser",
-//   async ({ id, ...data }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.put(
-//         `https://nemm-1.onrender.com/nem/${id}`,
-//         data
-//       );
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
-// export const getLoginUser = createAsyncThunk("getLogin", async () => {
-//   const response = await axios.get("https://nemm-1.onrender.com/nem" + _id);
-//   return response.data;
-// });
-
-export const addUser = createAsyncThunk("data/addUser", async (newItem) => {
+export const addUser = createAsyncThunk("addUser", async (newItem) => {
   try {
     const response = await axios.post(
-      `https://nemm-1.onrender.com/nem/`,
+      `https://nemm-1.onrender.com/nem`,
       newItem
     );
     return response.data;
@@ -44,29 +28,23 @@ export const addUser = createAsyncThunk("data/addUser", async (newItem) => {
     throw new Error("Failed to add");
   }
 });
-console.log("salam");
 
-export const deleteUsers = createAsyncThunk("news/deleteUsers", async (id) => {
+export const deleteUsers = createAsyncThunk("deleteUsers", async (id) => {
   try {
     await axios.delete(`https://nemm-1.onrender.com/nem/${id}`);
-    const response = await axios.get("https://nemm-1.onrender.com/nem/");
-    console.log(response.data);
-    const updatedUsers = response.data.filter((item) => item.id !== id);
-    return updatedUsers;
+    const response = await axios.get(`https://nemm-1.onrender.com/nem`);
+    console.log("Updated Data After Delete:", response.data);
+    return response.data;
   } catch (error) {
     throw new Error("Failed to delete");
   }
 });
 
-export const fetchDelete = createAsyncThunk("data/fetchDelete", async (id) => {
-  const response = await axios.delete(`https://nemm-1.onrender.com/nem` + id);
-  return response.data;
-});
-
-export const fetchPost = createAsyncThunk("data/fetchPost", async (item) => {
+export const postUser = createAsyncThunk("postUser", async (item) => {
   const response = await axios.post(`https://nemm-1.onrender.com/nem`, item);
   return response.data;
 });
+
 const saveBasketToLocalStorage = (basket) => {
   localStorage.setItem("basket", JSON.stringify(basket));
 };
@@ -76,83 +54,69 @@ const loadBasketFromLocalStorage = () => {
   return basket ? JSON.parse(basket) : [];
 };
 
-export const userSlice = createSlice({
-  name: "users",
+const userSlice = createSlice({
+  name: "gym",
   initialState: {
-    users: [],
-    basket: [],
+    basket: loadBasketFromLocalStorage(), // Local storage'dan yükle
     wishlist: [],
-    status: null,
+    data: [],
+    status: "idle",
     error: null,
+    login: null,
   },
   reducers: {
     addWishlist: (state, action) => {
-      let found = state.wishlist.find((item) => item._id == action.payload._id);
+      const found = state.wishlist.find(
+        (item) => item._id === action.payload._id
+      );
       if (found) {
-        state.wishlist = current(state.wishlist).filter(
-          (item) => item._id != action.payload._id
+        state.wishlist = state.wishlist.filter(
+          (item) => item._id !== action.payload._id
         );
       } else {
-        state.wishlist = [...current(state.wishlist), action.payload];
+        state.wishlist.push(action.payload);
       }
     },
-
     deleteWishlist: (state, action) => {
-      state.wishlist = current(state.wishlist).filter(
-        (item) => item._id != action.payload._id
+      state.wishlist = state.wishlist.filter(
+        (item) => item._id !== action.payload._id
       );
     },
-
     addBasket: (state, action) => {
-      let foundIndex = state.basket.findIndex(
-        (item) => item._id == action.payload._id
+      // Mevcut ürünü bul
+      const foundIndex = state.basket.findIndex(
+        (item) => item._id === action.payload._id
       );
+
+      // Ürün zaten var mı kontrol et
       if (foundIndex !== -1) {
-        state.basket = current(state.basket).map((item, index) =>
-          index === foundIndex ? { ...item, quantity: item.quantity + 1 } : item
-        );
+        // Ürün varsa, miktarı artır
+        state.basket[foundIndex].quantity += 1;
       } else {
-        state.basket = [
-          ...current(state.basket),
-          { ...action.payload, quantity: 1 },
-        ];
+        // Ürün yoksa, sepete ekle
+        state.basket.push({ ...action.payload, quantity: 1 });
       }
-      saveBasketToLocalStorage(state.basket);
-      console.log(state.basket);
-    },
 
+      // Sepeti localStorage'a kaydet
+      saveBasketToLocalStorage(state.basket);
+    },
     increaseBasket: (state, action) => {
-      let findIndex = state.basket.findIndex(
-        (item) => item._id == action.payload._id
-      );
-      state.basket = current(state.basket).map((item, index) =>
-        index === findIndex ? { ...item, quantity: item.quantity + 1 } : item
-      );
+      const item = state.basket.find((item) => item._id === action.payload._id);
+      if (item) item.quantity += 1;
       saveBasketToLocalStorage(state.basket);
     },
-
     decreaseBasket: (state, action) => {
-      let findIndex = state.basket.findIndex(
-        (item) => item._id == action.payload._id
-      );
-      state.basket = current(state.basket).map((item, index) =>
-        index === findIndex ? { ...item, quantity: item.quantity - 1 } : item
-      );
+      const item = state.basket.find((item) => item._id === action.payload._id);
+      if (item && item.quantity > 1) item.quantity -= 1;
       saveBasketToLocalStorage(state.basket);
     },
-
     deleteBasket: (state, action) => {
       state.basket = state.basket.filter(
-        (item) => item._id != action.payload._id
+        (item) => item._id !== action.payload._id
       );
-
       saveBasketToLocalStorage(state.basket);
     },
-    emptycartIteam: (state, action) => {
-      state.carts = [];
-    },
   },
-
   extraReducers: (builder) => {
     builder
       .addCase(getAllUsers.pending, (state) => {
@@ -161,58 +125,43 @@ export const userSlice = createSlice({
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
+        console.log("Data Set", action.payload);
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        console.error("Error", action.error.message);
       });
 
     builder
-      .addCase(fetchDelete.pending, (state) => {
+      .addCase(deleteUsers.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchDelete.fulfilled, (state, action) => {
+      .addCase(deleteUsers.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data = state.data.filter(
-          (item) => item._id !== action.payload._id
-        );
+        state.data = action.payload;
       })
-      .addCase(fetchDelete.rejected, (state, action) => {
+      .addCase(deleteUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
 
     builder
-      .addCase(fetchPost.pending, (state) => {
+      .addCase(postUser.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchPost.fulfilled, (state, action) => {
+      .addCase(postUser.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data = [...state.data, action.payload];
+        state.data.push(action.payload);
       })
-      .addCase(fetchPost.rejected, (state, action) => {
+      .addCase(postUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
-    // builder
-    //   .addCase(updateUser.pending, (state) => {
-    //     state.loading = true;
-    //   })
-    //   .addCase(updateUser.fulfilled, (state, action) => {
-    //     state.loading = false;
-    //     const updatedUser = action.payload;
-    //     const index = state.users.findIndex(
-    //       (user) => user._id === updatedUser._id
-    //     );
-    //     if (index !== -1) {
-    //       state.users[index] = updatedUser; // Kullanıcıyı güncelle
-    //     }
-    //     state.selectedUser = updatedUser; // Seçilen kullanıcıyı güncelle (isteğe bağlı)
-    //   })
-    //   .addCase(updateUser.rejected, (state, action) => {
-    //     state.loading = false;
-    //     state.error = action.payload;
-    //   });
+
+    builder.addCase(getLoginUser.fulfilled, (state, action) => {
+      state.login = action.payload;
+    });
   },
 });
 
@@ -220,10 +169,9 @@ export const {
   addWishlist,
   deleteWishlist,
   addBasket,
-  decreaseBasket,
   increaseBasket,
+  decreaseBasket,
   deleteBasket,
-  emptycartIteam,
 } = userSlice.actions;
 
 export default userSlice.reducer;

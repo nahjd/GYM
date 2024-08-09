@@ -11,6 +11,8 @@ const Menu = () => {
     const basket = useSelector((state) => state.gym.basket);
     const wishlist = useSelector((state) => state.gym.wishlist);
     const data = useSelector((state) => state.gym.data);
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ const Menu = () => {
         navigate(`/${id}`);
     };
 
+
     return (
         <div className="cards">
             {data && data.map((item) => (
@@ -29,7 +32,7 @@ const Menu = () => {
                     <img className='bir' src={item.image} alt={item.name} />
                     <div className="card-content">
                         <h5>{item.name}</h5>
-                        <p>${item.price}</p>
+                        <p>{item.price}</p>
                     </div>
                     <div className="card-actions">
                         <div className='buttons'>
