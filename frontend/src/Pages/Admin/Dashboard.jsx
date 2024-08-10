@@ -321,7 +321,7 @@ export default function Dashboard() {
                                                         <TableCell>{user._id}</TableCell>
                                                         <TableCell>
                                                             <Link
-                                                                to={`/${user.id}`}
+                                                                to={`/${user._id}`}
                                                                 style={{ color: "black", textDecoration: "none" }}
                                                             >
                                                                 {user.name}
@@ -341,7 +341,14 @@ export default function Dashboard() {
                                                         <TableCell>{user.description}</TableCell>
                                                         <TableCell>{user.favourite}</TableCell>
                                                         <TableCell>{user.rate}</TableCell>
-                                                        {/* <TableCell><Link to={`/admin/edit/${user._id}`} style={{ color: "blue", textDecoration: "none" }}>
+                                                        {/* <TableCell><Link to={`/admin/edit/${user._id}`} style={{
+                                                            color: "black",
+                                                            border: "none",
+                                                            padding: "10px",
+                                                            borderRadius: "5px",
+                                                            cursor: "pointer",
+                                                            backgroundColor: "yellow",
+                                                        }}>
                                                             Edit
                                                         </Link></TableCell> */}
 

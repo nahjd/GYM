@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   const response = await axios.get(`https://nemm-1.onrender.com/nem`);
-  console.log("API RESPONSE", response.data);
+  // console.log("API RESPONSE", response.data);
   return response.data;
 });
 
@@ -65,6 +65,29 @@ const userSlice = createSlice({
     login: null,
   },
   reducers: {
+    editProfile: (state, action) => {
+      const user = { ...action.payload };
+      console.log("action", user);
+
+      axios.patch(`https://nemm-1.onrender.com/nem${user._id}`, {
+        lastName: user.lastName,
+        firstName: user.firstName,
+        username: user.username,
+        email: user.email,
+        image: user.image,
+        price: user.price,
+        rate: user.rate,
+        description: user.description,
+      });
+      const array = state.users.map((elem) => {
+        if (elem._id == user._id) {
+          return user;
+        } else {
+          return elem;
+        }
+      });
+      state.users = array;
+    },
     addWishlist: (state, action) => {
       const found = state.wishlist.find(
         (item) => item._id === action.payload._id
@@ -172,6 +195,7 @@ export const {
   increaseBasket,
   decreaseBasket,
   deleteBasket,
+  editProfile,
 } = userSlice.actions;
 
 export default userSlice.reducer;

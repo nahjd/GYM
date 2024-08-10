@@ -44,7 +44,7 @@ function Login() {
             username: Yup.string().required("Required"),
         }),
         onSubmit: (values) => {
-            axios.post("https://nemm-1.onrender.com/nem", values).then((res) => {
+            axios.post("http://localhost:3030/login", values).then((res) => {
                 console.log(res);
                 if (res.status === 200) {
                     const userId = res.data;
@@ -82,13 +82,13 @@ function Login() {
                             </p>
                             <p className="text animate__animated animate__fadeIn">
                                 If you haven’t signed up yet.
-                                {/* <span
+                                <span
                                     onClick={() => {
                                         navigate("/register");
                                     }}
                                 >
                                     Register here!
-                                </span> */}
+                                </span>
                             </p>
                         </div>
                         <form onSubmit={formik.handleSubmit}>

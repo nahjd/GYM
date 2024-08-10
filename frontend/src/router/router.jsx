@@ -9,7 +9,7 @@ import Dashboard from "../Pages/Admin/Dashboard"
 import AddUser from "../Pages/Admin/AddUser"
 import AdminNavbar from "../Pages/Admin/Navbar"
 import Blog from "../Components/Blog/Blog"
-// import EditUser from "../Pages/Admin/AdminEdit"
+import EditUser from "../Pages/Admin/AdminEdit"
 import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
 
@@ -72,10 +72,10 @@ export const routes = [
                 path: "/admin/navbar",
                 element: <AdminNavbar />
             },
-            // {
-            //     path: "/admin/edit/:id",
-            //     element: <EditUser />
-            // },
+            {
+                path: "/admin/edit/:id",
+                element: <EditUser />
+            },
 
         ]
     }

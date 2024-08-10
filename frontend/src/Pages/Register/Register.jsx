@@ -25,8 +25,7 @@ function Register() {
             firstName: "",
             lastName: "",
             username: "",
-            profileImage:
-                "https://haslam.utk.edu/wp-content/themes/hcb/assets/img/no-photo.jpeg",
+
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -45,12 +44,13 @@ function Register() {
                 .max(15, "Must be 15 characters or less")
                 .required("Required"),
         }),
-        onSubmit: (values) => {
+        onSubmit: (values, { setSubmitting }) => {
+            // Formun doğal submit davranışını engelle
+            event.preventDefault();
+
             axios
-                .post("http://localhost:3030/nem", {  // Güncellenmiş uç nokta
+                .post("http://localhost:3030/nem", {
                     ...values,
-                    profileImage:
-                        "https://haslam.utk.edu/wp-content/themes/hcb/assets/img/no-photo.jpeg",
                 })
                 .then((res) => {
                     if (res.status === 201) {
@@ -78,7 +78,10 @@ function Register() {
                         title: "Error",
                         text: error.response ? error.response.data.message : error.message,
                     });
-                });
+                })
+                .finally(() => {
+                    setSubmitting(false);
+                })
         },
     });
 

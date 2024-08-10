@@ -2,27 +2,28 @@ const UserModel = require("./../model/userModel");
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await UserModel.find({});
-    res.status(200).json(users);
+    const page = parseInt(req.query.page) || 1;
+    const limit = 100;
+    const skip = (page - 1) * limit;
+    const users = await UserModel.find({}).skip(skip).limit(limit);
+    res.send(users);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching users" });
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
-
 const getUserById = async (req, res) => {
   const id = req.params.id;
   console.log(id);
   const user = await UserModel.findOne({ _id: id });
   res.send(user);
 };
-
 const deleteUser = async (req, res) => {
   const id = req.params.id;
   let deletesUser = await UserModel.findByIdAndDelete(id);
   console.log(deletesUser);
   res.send(deletesUser);
 };
-
 const postUser = async (req, res) => {
   const user = req.body;
   try {
@@ -48,12 +49,11 @@ const postUser = async (req, res) => {
     };
   }
 };
-
 const login = async (req, res) => {
   const user = req.body;
 
   try {
-    let findUser = await adminModel.findOne({
+    let findUser = await UserModel.findOne({
       username: user.username,
       password: user.password,
     });
@@ -73,13 +73,11 @@ const patchUser = async (req, res) => {
   let updateUser = await UserModel.findOneAndUpdate({ _id: id }, req.body);
   res.send(updateUser);
 };
-
 const putUser = async (req, res) => {
   const id = req.params.id;
   let replaceUser = await UserModel.replaceOne({ _id: id }, req.body);
   res.send(replaceUser);
 };
-
 module.exports = {
   getAllUser,
   getUserById,
