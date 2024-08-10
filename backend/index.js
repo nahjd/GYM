@@ -4,7 +4,7 @@ const port = process.env.MONGODB_URI || 3030;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRouter = require("./router/router");
-// const adminRouter = require("./router/adminRouter");
+const adminRouter = require("./router/adminRouter");
 
 require("dotenv").config();
 require("./config/db");
@@ -12,7 +12,7 @@ require("./config/db");
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/", userRouter);
-// app.use("/", adminRouter);
+app.use("/", adminRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
