@@ -177,8 +177,7 @@ function Login() {
                                 <div className="text">
                                     <p className="head">NAKO GYM</p>
                                     <p className="desc">
-                                        {/* Dün Artık Tarih Oldu, Yarın ise Bir Bilmece, Bugün Sana
-                                        Hediyedir.. */}
+                                        Bodybuilding is 10% work, 20% nutrition, and 70% rest.
                                     </p>
                                 </div>
                             </div>

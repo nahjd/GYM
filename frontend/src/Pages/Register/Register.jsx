@@ -12,6 +12,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import img9 from "./../../../images/gym1.jpg"
+import img10 from "./../../../images/gym2.jpg"
+
 
 
 
@@ -45,9 +48,6 @@ function Register() {
                 .required("Required"),
         }),
         onSubmit: (values, { setSubmitting }) => {
-            // Formun doğal submit davranışını engelle
-            event.preventDefault();
-
             axios
                 .post("http://localhost:3030/nem", {
                     ...values,
@@ -64,12 +64,6 @@ function Register() {
                                 navigate("/");
                             }
                         });
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: res.data.message || "An error occurred!",
-                        });
                     }
                 })
                 .catch((error) => {
@@ -81,8 +75,9 @@ function Register() {
                 })
                 .finally(() => {
                     setSubmitting(false);
-                })
+                });
         },
+
     });
 
     return (
@@ -214,6 +209,7 @@ function Register() {
                                 <button
                                     className="animate__animated animate__fadeIn"
                                     type="submit"
+                                    disabled={formik.isSubmitting}
                                 >
                                     Get Started
                                 </button>
@@ -240,21 +236,20 @@ function Register() {
                         <SwiperSlide>
                             <div className="image">
                                 <img
-                                    src="https://m.media-amazon.com/images/S/pv-target-images/fb97a6ff4bb0a0f10f33b8020b3ff13218955a5d08a04a11cc4cc26f745fb468.jpg"
+                                    src={img9}
                                     alt=""
                                 />
                                 <div className="text-logo">
                                     <div className="logo">
                                         <img
-                                            src="https://m.media-amazon.com/images/I/81L6airBNoL._AC_UF1000,1000_QL80_.jpg"
+                                            src="https://www.ormo.com.tr/CMSFiles/Image/Content/636228611439359116.jpg"
                                             alt=""
                                         />
                                     </div>
                                     <div className="text">
-                                        <p className="head">Kung Fu Panda</p>
+                                        <p className="head">NAKO GYM</p>
                                         <p className="desc">
-                                            Dün Artık Tarih Oldu, Yarın ise Bir Bilmece, Bugün Sana
-                                            Hediyedir..
+                                            Bodybuilding is 10% work, 20% nutrition, and 70% rest.
                                         </p>
                                     </div>
                                 </div>
@@ -263,9 +258,23 @@ function Register() {
                         <SwiperSlide>
                             <div className="image">
                                 <img
-                                    src="https://img-s1.onedio.com/id-56eec0d7d9ab5e9b2f3c3c0a/rev-0/raw/s-963b658d4a920a7a1be43ee85adc02ba0a8785a2.jpg"
+                                    src={img10}
                                     alt=""
                                 />
+                                <div className="text-logo">
+                                    <div className="logo">
+                                        <img
+                                            src="https://www.ormo.com.tr/CMSFiles/Image/Content/636228611439359116.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="text">
+                                        <p className="head">NAKO GYM</p>
+                                        <p className="desc">
+                                            When you're about to give up, remember why you started
+                                        </p>
+                                    </div>
+                                </div>
 
                             </div>
                         </SwiperSlide>
