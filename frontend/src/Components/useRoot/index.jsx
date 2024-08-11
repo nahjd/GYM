@@ -3,13 +3,19 @@ import Navbar from "./../Navbar/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 const index = () => {
-    const location = useLocation();
-    const showNavbar = location.pathname !== '/';
+    // const location = useLocation();
+    // const showNavbar = location.pathname !== '/';
+    // const showNavbar1 = location.pathname !== '/register';
+
+
+
     return (
         <>
 
             <Outlet />
-            {showNavbar && <Navbar />}
+            {/* {showNavbar && showNavbar1 && <Navbar />}
+             */}
+            <Navbar />
             <Footer />
         </>
     );

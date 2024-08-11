@@ -11,7 +11,7 @@ import AdminNavbar from "../Pages/Admin/Navbar"
 import Blog from "../Components/Blog/Blog"
 import EditUser from "../Pages/Admin/AdminEdit"
 // import Login from "../Pages/Login/Login"
-// import Register from "../Pages/Register/Register"
+import Register from "../Pages/Register/Register"
 
 export const routes = [
     {
@@ -26,10 +26,10 @@ export const routes = [
                 path: "/",
                 element: <Home />
             },
-            // {
-            //     path: "/register",
-            //     element: <Register />
-            // },
+            {
+                path: "/register",
+                element: <Register />
+            },
             {
                 path: "/blog",
                 element: <Blog />

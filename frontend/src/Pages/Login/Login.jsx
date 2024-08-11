@@ -44,7 +44,7 @@ function Login() {
             username: Yup.string().required("Required"),
         }),
         onSubmit: (values) => {
-            axios.post("http://localhost:3030/login", values).then((res) => {
+            axios.post("https://nemm-1.onrender.com/nem", values).then((res) => {
                 console.log(res);
                 if (res.status === 200) {
                     const userId = res.data;

@@ -49,7 +49,7 @@ function Register() {
         }),
         onSubmit: (values, { setSubmitting }) => {
             axios
-                .post("http://localhost:3030/nem", {
+                .post("https://nemm-1.onrender.com/nem", {
                     ...values,
                 })
                 .then((res) => {
