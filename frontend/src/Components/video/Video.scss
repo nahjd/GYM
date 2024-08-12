@@ -102,6 +102,10 @@
         height: 40vh;
         margin-bottom: 1%;
       }
+      .circle {
+        width: 160px;
+        height: 160px;
+      }
     }
     @media only screen and (max-width: 768px) {
       .play-icon {
@@ -109,9 +113,10 @@
       }
       .icon-animation {
         // display: none;
-        width: 10px;
-        height: 10px;
-        font-size: 510pxpx;
+        .circle {
+          width: 110px;
+          height: 110px;
+        }
       }
     }
     @media only screen and (max-width: 425px) {
@@ -119,10 +124,28 @@
         // border: 1px solid red;
       }
       .icon-animation {
+        // background-color: red;
+
         // display: none;
-        width: 10px;
-        height: 10px;
-        font-size: 5px;
+      }
+      .circle {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    @media only screen and (max-width: 250px) {
+      .play-icon {
+        // border: 1px solid red;
+      }
+      .icon-animation {
+        // background-color: red;
+
+        // display: none;
+      }
+      .circle {
+        width: 30px;
+
+        height: 30px;
       }
     }
   }

@@ -20,7 +20,7 @@ const Video = () => {
                 <div className={`video ${isPlaying ? 'playing' : ''}`}>
                     {!isPlaying && (
                         <div className="play-icon" onClick={handlePlay}>
-                            <div className="icon-animation"><IoIosPlayCircle /></div>
+                            <div className="icon-animation"><IoIosPlayCircle className='circle' /></div>
                         </div>
                     )}
                     {isPlaying && (
