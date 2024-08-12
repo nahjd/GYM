@@ -13,8 +13,8 @@ const index = () => {
         <>
 
             <Outlet />
-            {/* {showNavbar && showNavbar1 && <Navbar />}
-             */}
+            {/* {showNavbar && showNavbar1 && detail < Navbar />} */}
+
             <Navbar />
             <Footer />
         </>

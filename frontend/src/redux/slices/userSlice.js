@@ -121,7 +121,7 @@ const userSlice = createSlice({
       }
 
       // Sepeti localStorage'a kaydet
-      saveBasketToLocalStorage(state.basket);
+      // saveBasketToLocalStorage(state.basket);
     },
     increaseBasket: (state, action) => {
       const item = state.basket.find((item) => item._id === action.payload._id);

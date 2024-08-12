@@ -46,10 +46,12 @@ const Menu = () => {
                             </button>
                             <button onClick={(e) => {
                                 e.stopPropagation();
+                                console.log('Sepete ekleme tetiklendi');
                                 dispatch(addBasket(item));
                             }}>
                                 <FaShoppingBasket style={{ color: "blue", fontSize: "25px" }} />
                             </button>
+
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { MdDelete } from "react-icons/md";
+import { MdOutlineFavorite } from "react-icons/md";
+import { FaShoppingBasket } from "react-icons/fa";
+
+
 import "./Wishlist.scss"
 const Wishlist = () => {
     const wishlist = useSelector((state) => state.gym.wishlist)
@@ -27,36 +31,31 @@ const Wishlist = () => {
                     {wishlist && wishlist.map((item, i) => {
                         return (
                             <>
-                                <Card className='wishcard'
-                                    key={item.id}
-                                    sx={{ maxWidth: "100%" }}>
+                                <div className='cardd' key={item._id} onClick={() => handleCardClick(item._id)}>
+                                    <img className='bir' src={item.image} alt={item.name} />
+                                    <div className="card-content">
+                                        <h5>{item.name}</h5>
+                                        <p>{item.price}</p>
+                                    </div>
+                                    <div className="card-actions">
+                                        <div className='buttons'>
+                                            <button onClick={(e) => {
+                                                e.stopPropagation();
+                                                dispatch(deleteWishlist(item));
+                                            }}>
+                                                <MdDelete style={{ color: "red", fontSize: '25px' }} />
+                                            </button>
+                                            <button onClick={(e) => {
+                                                e.stopPropagation();
 
-                                    <CardMedia
-                                        sx={{ height: 340, width: 340 }}
-                                        image={item.image}
-                                        title="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {item.price}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {item.name}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button
-                                            onClick={() => {
-                                                dispatch(deleteWishlist(item))
-                                            }}
-                                            size="small"><MdDelete style={{ color: "red", fontSize: "25px" }} />
-                                        </Button>
-                                        <Button style={{ color: "black" }} onClick={() => {
-                                            dispatch(addBasket(item))
-                                        }} size="small">Basket</Button>
+                                                dispatch(addBasket(item));
+                                            }}>
+                                                <FaShoppingBasket style={{ color: "blue", fontSize: "25px" }} />
+                                            </button>
 
-                                    </CardActions>
-                                </Card>
+                                        </div>
+                                    </div>
+                                </div>
                             </>
                         )
                     })}
