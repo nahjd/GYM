@@ -39,21 +39,21 @@ const Detail = () => {
             <div className="wishlistbody">
                 <div className="containerrr" >
                     {detailed.length > 0 && detailed.map((item) => (
-                        <div className="content-container" key={item._id} style={{ display: "flex", gap: "20px" }}>
-                            <div className="card" onClick={() => handleCardClick(item._id)}>
-                                <img className='bir' src={item.image} alt={item.name} />
-                                <div className="card-content">
+                        <div className="content-container1" key={item._id} style={{ display: "flex", gap: "20px" }}>
+                            <div className="card1" onClick={() => handleCardClick(item._id)}>
+                                <img className='bir1' src={item.image} alt={item.name} />
+                                <div className="card-content1">
                                     <h5>{item.name}</h5>
                                     <p>{item.price}</p>
                                 </div>
-                                <div className="card-actions">
-                                    <div className="icons">
-                                        <div className="rate-fav">
-                                            <div className="rate">
+                                <div className="card-actions1">
+                                    <div className="icons1">
+                                        <div className="rate-fav1">
+                                            <div className="rate1">
                                                 <MdOutlineStarPurple500 style={{ fontSize: "21px", color: "#F89D13" }} />
                                                 {item.rate}
                                             </div>
-                                            <div className="fav">
+                                            <div className="fav1">
                                                 <FaHeart style={{ fontSize: "17px", color: "red" }} onClick={() => dispatch(addWishlist(item))} />
                                                 {item.favourite}
                                             </div>
@@ -64,7 +64,7 @@ const Detail = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="description">
+                            <div className="description1">
                                 <h1>Description </h1>
                                 <b> <span>{item.name}   - </span> </b>
                                 <p> {item.description} </p>
@@ -74,6 +74,7 @@ const Detail = () => {
                     ))}
                 </div>
             </div >
+
         </>
     );
 };
