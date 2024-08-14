@@ -61,17 +61,17 @@
         animation: slideIn 2s infinite;
       }
 
-      @keyframes slideIn {
-        0% {
-          transform: translateX(-50%);
-        }
-        50% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(50%);
-        }
-      }
+      // @keyframes slideIn {
+      //   0% {
+      //     transform: translateX(-50%);
+      //   }
+      //   50% {
+      //     transform: translateX(0);
+      //   }
+      //   100% {
+      //     transform: translateX(50%);
+      //   }
+      // }
     }
   }
 
@@ -88,7 +88,7 @@
       color: white;
       display: block;
       position: absolute;
-      top: 10px;
+      top: 0px;
       right: 10px;
       padding: 5px;
       border-radius: 50%;
@@ -121,7 +121,17 @@
     }
 
     .rightnav {
-      display: none;
+      width: 10px;
+      font-size: 28px;
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      top: 15px;
+      // border: 10px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // display: none;
     }
   }
 }

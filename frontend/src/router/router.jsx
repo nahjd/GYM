@@ -12,6 +12,7 @@ import Blog from "../Components/Blog/Blog"
 import EditUser from "../Pages/Admin/AdminEdit"
 // import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
+import AdminLogin from "../Pages/Admin/AdminLogin"
 
 export const routes = [
     {
@@ -47,6 +48,7 @@ export const routes = [
                 path: "/:id",
                 element: <Detail />
             },
+
         ]
     }, {
         path: "/admin",
@@ -55,6 +57,10 @@ export const routes = [
             {
                 path: "/admin/admin",
                 element: <Dashboard />
+            },
+            {
+                path: "/admin/login",
+                element: <AdminLogin />
             },
             {
                 path: "/admin/adminUsers",

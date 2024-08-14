@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navbar.scss';
 import { Link } from 'react-router-dom';
 import { IoPersonOutline } from 'react-icons/io5';
-import { BiBasket } from 'react-icons/bi';
+import { BiBasket, BiHeart } from 'react-icons/bi';
 import { RiMenuFill, RiCloseFill } from 'react-icons/ri';
 import img1 from "./../../../images/navleft.png";
 import { RiAdminFill } from "react-icons/ri";
@@ -22,18 +22,19 @@ function Navbar() {
                 </div>
                 <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
                     <li><Link to="/">HOME</Link></li>
-                    <li><Link to="/wishlist">WISHLIST</Link></li>
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/portfolio">PORTFOLIO</Link></li>
                     <li><Link to="/shop">SHOP</Link></li>
+                    <li><Link to="/wishlist"><BiHeart style={{ color: "white", fontSize: "25px" }} /> </Link></li>
                     <li>  <Link to="/basket" ><BiBasket style={{ color: "white", fontSize: "25px" }} /></Link></li>
+
 
 
                 </ul>
                 <div className="rightnav">
 
-                    {/* <Link to="/admin/admin">
-                        <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link> */}
+                    <Link to="/admin/login">
+                        <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link>
                 </div>
             </div>
         </div>
