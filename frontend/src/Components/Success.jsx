@@ -6,7 +6,7 @@ const Success = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/'); // Redirects to the homepage
+        navigate('/');
     };
 
     return (
