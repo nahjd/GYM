@@ -13,7 +13,7 @@ import EditUser from "../Pages/Admin/AdminEdit"
 // import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
 import AdminLogin from "../Pages/Admin/AdminLogin"
-import Sucess from "../Components/Sucess"
+import Success from "../Components/Success"
 import Cancel from "../Components/Cancel"
 
 export const routes = [
@@ -51,8 +51,8 @@ export const routes = [
                 element: <Detail />
             },
             {
-                path: "/sucess",
-                element: <Sucess />
+                path: "/Success",
+                element: <Success />
             },
             {
                 path: "/cancel",
