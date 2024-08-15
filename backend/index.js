@@ -20,7 +20,7 @@ app.use("/", userRouter);
 app.use("/", adminRouter);
 
 // checkout api
-app.post("/nem/create-checkout-session", async (req, res) => {
+app.post("/create-checkout-session", async (req, res) => {
   const { products } = req.body;
   const lineItems = products.map((product) => ({
     price_data: {

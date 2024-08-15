@@ -14,16 +14,16 @@ const Basket = () => {
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const storedBasket = JSON.parse(localStorage.getItem('basket')) || [];
-        if (storedBasket.length) {
-            storedBasket.forEach(item => {
-                for (let i = 0; i < item.quantity; i++) {
-                    dispatch(addBasket(item));
-                }
-            });
-        }
-    }, [dispatch]);
+    // useEffect(() => {
+    //     const storedBasket = JSON.parse(localStorage.getItem('basket')) || [];
+    //     if (storedBasket.length) {
+    //         storedBasket.forEach(item => {
+    //             for (let i = 0; i < item.quantity; i++) {
+    //                 dispatch(addBasket(item));
+    //             }
+    //         });
+    //     }
+    // }, [dispatch]);
 
     useEffect(() => {
         dispatch(getAllUsers())
@@ -34,9 +34,9 @@ const Basket = () => {
             });
     }, [dispatch]);
 
-    useEffect(() => {
-        localStorage.setItem('basket', JSON.stringify(basket));
-    }, [basket]);
+    // useEffect(() => {
+    //     localStorage.setItem('basket', JSON.stringify(basket));
+    // }, [basket]);
 
     // Calculate total price
     useEffect(() => {
@@ -82,7 +82,7 @@ const Basket = () => {
         const headers = {
             "Content-Type": "application/json",
         };
-        const response = await fetch("http://localhost:3030/nem/create-checkout-session", {
+        const response = await fetch("http://localhost:3030/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body),
