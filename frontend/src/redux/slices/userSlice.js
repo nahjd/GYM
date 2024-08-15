@@ -57,7 +57,7 @@ const loadBasketFromLocalStorage = () => {
 const userSlice = createSlice({
   name: "gym",
   initialState: {
-    basket: loadBasketFromLocalStorage(), // Local storage'dan yükle
+    basket: [],
     wishlist: [],
     data: [],
     status: "idle",

@@ -13,6 +13,8 @@ import EditUser from "../Pages/Admin/AdminEdit"
 // import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
 import AdminLogin from "../Pages/Admin/AdminLogin"
+import Sucess from "../Components/Sucess"
+import Cancel from "../Components/Cancel"
 
 export const routes = [
     {
@@ -47,6 +49,14 @@ export const routes = [
             {
                 path: "/:id",
                 element: <Detail />
+            },
+            {
+                path: "/sucess",
+                element: <Sucess />
+            },
+            {
+                path: "/cancel",
+                element: <Cancel />
             },
 
         ]
