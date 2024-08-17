@@ -3,6 +3,7 @@ import './Navbar.scss';
 import { Link } from 'react-router-dom';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BiBasket, BiHeart } from 'react-icons/bi';
+import { MdOutlineLogin } from "react-icons/md";
 import { RiMenuFill, RiCloseFill } from 'react-icons/ri';
 import img1 from "./../../../images/navleft.png";
 import { RiAdminFill } from "react-icons/ri";
@@ -35,6 +36,8 @@ function Navbar() {
 
                     <Link to="/admin/login">
                         <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link>
+                    <Link to="/register">
+                        <MdOutlineLogin style={{ color: "white", marginBottom: "15px" }} /></Link>
                 </div>
             </div>
         </div>
