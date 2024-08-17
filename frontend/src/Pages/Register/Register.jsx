@@ -49,7 +49,7 @@ function Register() {
         }),
         onSubmit: (values, { setSubmitting }) => {
             axios
-                .post("https://nemm-1.onrender.com/nem", {
+                .post("https://short-1.onrender.com/stella", {
                     ...values,
                 })
                 .then((res) => {
@@ -61,7 +61,7 @@ function Register() {
                             confirmButtonText: "OK",
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                navigate("/");
+                                navigate("/login");
                             }
                         });
                     }

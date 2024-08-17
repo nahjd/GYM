@@ -2,13 +2,13 @@ const router = require("express").Router();
 
 const adminControllers = require("./../controllers/adminController");
 
-router.get("/login", adminControllers.getAllUser);
-router.get("/login/:id", adminControllers.getUserById);
+router.get("/stella", adminControllers.getAllUser);
+router.get("/stella/:id", adminControllers.getUserById);
 // router.delete("/login/:id", adminControllers.deleteUser);
-router.patch("/login/:id", adminControllers.patchUser);
-router.put("/login/:id", adminControllers.putUser);
+router.patch("/stella/:id", adminControllers.patchUser);
+router.put("/stella/:id", adminControllers.putUser);
 
-router.post("/login", adminControllers.postUser);
-router.post("/login", adminControllers.login);
+// router.post("/stella", adminControllers.postUser);
+router.post("/stella", adminControllers.stella);
 
 module.exports = router;

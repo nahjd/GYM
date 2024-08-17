@@ -10,7 +10,7 @@ import AddUser from "../Pages/Admin/AddUser"
 import AdminNavbar from "../Pages/Admin/Navbar"
 import Blog from "../Components/Blog/Blog"
 import EditUser from "../Pages/Admin/AdminEdit"
-// import Login from "../Pages/Login/Login"
+import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
 import AdminLogin from "../Pages/Admin/AdminLogin"
 import Success from "../Components/Success"
@@ -21,10 +21,10 @@ export const routes = [
         path: "/",
         element: <UseRoot />,
         children: [
-            // {
-            //     path: "/",
-            //     element: <Login />
-            // },
+            {
+                path: "/login",
+                element: <Login />
+            },
             {
                 path: "/",
                 element: <Home />

@@ -14,6 +14,7 @@ require("dotenv").config();
 require("./config/db");
 
 app.use(cors());
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use("/", userRouter);

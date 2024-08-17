@@ -2,25 +2,25 @@ import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
-  const response = await axios.get(`https://nemm-1.onrender.com/nem`);
+  const response = await axios.get(`https://short-1.onrender.com/bloom`);
   // console.log("API RESPONSE", response.data);
   return response.data;
 });
 
 export const getLoginUser = createAsyncThunk("getLogin", async (_id) => {
-  const response = await axios.get(`https://nemm-1.onrender.com/nem/${_id}`);
+  const response = await axios.get(`https://short-1.onrender.com/bloom${_id}`);
   return response.data;
 });
 
 export const getUserById = createAsyncThunk("getUserById", async (id) => {
-  const response = await axios.get(`https://nemm-1.onrender.com/nem/${id}`);
+  const response = await axios.get(`https://short-1.onrender.com/bloom${id}`);
   return response.data;
 });
 
 export const addUser = createAsyncThunk("addUser", async (newItem) => {
   try {
     const response = await axios.post(
-      `https://nemm-1.onrender.com/nem`,
+      `https://short-1.onrender.com/bloom`,
       newItem
     );
     return response.data;
@@ -31,17 +31,25 @@ export const addUser = createAsyncThunk("addUser", async (newItem) => {
 
 export const deleteUsers = createAsyncThunk("deleteUsers", async (id) => {
   try {
-    await axios.delete(`https://nemm-1.onrender.com/nem/${id}`);
-    const response = await axios.get(`https://nemm-1.onrender.com/nem`);
+    // Send DELETE request to remove user by ID
+    await axios.delete(`https://short-1.onrender.com/bloom/${id}`);
+
+    // Fetch the updated list of users after deletion
+    const response = await axios.get(`https://short-1.onrender.com/bloom`);
+
+    // Log the updated data (optional)
     console.log("Updated Data After Delete:", response.data);
+
+    // Return the updated user list
     return response.data;
   } catch (error) {
-    throw new Error("Failed to delete");
+    // Throw error with message for debugging
+    throw new Error(`Failed to delete: ${error.message}`);
   }
 });
 
 export const postUser = createAsyncThunk("postUser", async (item) => {
-  const response = await axios.post(`https://nemm-1.onrender.com/nem`, item);
+  const response = await axios.post(`https://short-1.onrender.com/bloom`, item);
   return response.data;
 });
 
@@ -69,7 +77,7 @@ const userSlice = createSlice({
       const user = { ...action.payload };
       console.log("action", user);
 
-      axios.patch(`https://nemm-1.onrender.com/nem${user._id}`, {
+      axios.patch(`https://short-1.onrender.com/bloom${user._id}`, {
         lastName: user.lastName,
         firstName: user.firstName,
         username: user.username,

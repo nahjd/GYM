@@ -16,11 +16,11 @@ const UserSchema = mongoose.Schema(
     favourite: String,
   },
   {
-    collection: "nem",
+    collection: "bloom",
     timestamps: true,
   }
 );
 
-const Model = mongoose.model("nem", UserSchema);
+const Model = mongoose.model("bloom", UserSchema);
 
 module.exports = Model;

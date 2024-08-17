@@ -7,11 +7,11 @@ const UserSchema = mongoose.Schema(
     email: String,
   },
   {
-    collection: "login",
+    collection: "stella",
     timestamps: true,
   }
 );
 
-const Model = mongoose.model("login", UserSchema);
+const Model = mongoose.model("stella", UserSchema);
 
 module.exports = Model;
