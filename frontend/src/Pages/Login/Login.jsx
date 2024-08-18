@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import GoogleButton from 'react-google-button';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { googleAuthProvider, auth } from "../Firebase/firebase";
+import { signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -8,23 +11,44 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const handleSignInWithGoogle = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleAuthProvider);
+            const user = result.user;
+
+            // Kullanıcı bilgilerini console'a yazdır
+            console.log("Google Sign-In Result: ", result);
+            console.log("User Info: ", user);
+
+            // Token ve kullanıcı bilgilerini localStorage'a kaydet
+            localStorage.setItem('token', user.accessToken);
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Ana sayfaya yönlendir
+            navigate("/home");
+        } catch (err) {
+            console.log(err.message); // Hata mesajını konsola yazdır
+            setError("Google ile giriş yapılamadı. Lütfen tekrar deneyin."); // Kullanıcıya hata mesajı göster
+        }
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            // Send login request to backend
+            // Backend'e giriş isteği gönder
             const response = await axios.post("http://localhost:3030/stella", {
                 username,
                 password,
             });
 
             if (response.status === 200) {
-                // Assuming your backend returns user ID or similar on success
-                navigate("/");
+                // Giriş başarılı, ana sayfaya yönlendir
+                navigate("/home");
             }
         } catch (err) {
-            // Handle errors (e.g., incorrect credentials, server issues)
-            setError(err.response ? err.response.data : "An error occurred");
+            // Hataları işleme (örneğin, yanlış bilgiler, sunucu sorunları)
+            setError(err.response ? err.response.data : "Bir hata oluştu");
         }
     };
 
@@ -48,7 +72,8 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     style={{ marginBottom: "10px", padding: "10px", fontSize: "16px", border: "1px solid #ccc", borderRadius: "4px" }}
-                />
+                /> <br />
+                <GoogleButton style={{ width: "100%" }} onClick={handleSignInWithGoogle} /> <br />
                 <button
                     type="submit"
                     style={{ padding: "10px", fontSize: "16px", backgroundColor: "#134074", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}

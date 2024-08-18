@@ -22,11 +22,11 @@ export const routes = [
         element: <UseRoot />,
         children: [
             {
-                path: "/login",
+                path: "/",
                 element: <Login />
             },
             {
-                path: "/",
+                path: "/home",
                 element: <Home />
             },
             {
