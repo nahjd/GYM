@@ -158,12 +158,24 @@ input[type="submit"]:active {
 .google {
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 55px;
   width: 100%;
   font-size: 35px;
 
   // background-color: #4285f4;
   // border: none;
   // border: 10px solid red;
+}
+
+.back {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+
+  height: 27px;
+  width: 30px;
+
+  object-fit: cover;
 }

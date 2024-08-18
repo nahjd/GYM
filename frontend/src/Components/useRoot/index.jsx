@@ -6,7 +6,7 @@ const index = () => {
 
     const location = useLocation();
     const showNavbar = location.pathname !== '/';
-    // const showNavbar1 = location.pathname !== '/register';
+    const showNavbar1 = location.pathname !== '/register';
 
 
 
@@ -14,7 +14,7 @@ const index = () => {
         <>
 
             <Outlet />
-            {showNavbar && < Navbar />}
+            {showNavbar && showNavbar1 && < Navbar />}
 
             {/* <Navbar /> */}
             <Footer />

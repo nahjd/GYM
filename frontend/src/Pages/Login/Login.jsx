@@ -6,6 +6,8 @@ import { googleAuthProvider, auth } from "../Firebase/firebase";
 import { signInWithPopup } from 'firebase/auth';
 import "./Login.scss"
 import { FcGoogle } from "react-icons/fc";
+import { SiFacebook } from "react-icons/si"
+import { FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -173,7 +175,13 @@ const Login = () => {
                                 <i>Password</i>
                             </div>
                             <div className="google">
+
+                                <SiFacebook style={{ color: "#1198F6", backgroundColor: "white", borderRadius: '50%' }} />
                                 <FcGoogle onClick={handleSignInWithGoogle} />
+                                <div className="back">
+                                    <FaLinkedin style={{ color: "#1198F6", }} />
+
+                                </div>
                             </div>
                             <div className="inputBox">
                                 <input
