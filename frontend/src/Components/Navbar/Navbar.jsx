@@ -36,8 +36,8 @@ function Navbar() {
 
                     <Link to="/admin/login">
                         <RiAdminFill style={{ color: "white", marginBottom: "15px" }} /></Link>
-                    <Link to="/register">
-                        <MdOutlineLogin style={{ color: "white", marginBottom: "15px" }} /></Link>
+                    {/* <Link to="/register">
+                        <MdOutlineLogin style={{ color: "white", marginBottom: "15px" }} /></Link> */}
                 </div>
             </div>
         </div>
