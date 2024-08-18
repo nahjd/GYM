@@ -8,6 +8,7 @@ import "./Login.scss"
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si"
 import { FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -173,6 +174,9 @@ const Login = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <i>Password</i>
+                            </div>
+                            <div class="links">  <a href=""><Link to="/register">Sign up</Link></a>
+
                             </div>
                             <div className="google">
 
