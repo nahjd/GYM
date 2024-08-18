@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { googleAuthProvider, auth } from "../Firebase/firebase";
 import { signInWithPopup } from 'firebase/auth';
+import "./Login.scss"
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -53,34 +55,143 @@ const Login = () => {
     };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-            <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", width: "300px", padding: "20px", border: "1px solid #ddd", borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
-                <h2 style={{ textAlign: "center" }}>Login</h2>
-                {error && <div style={{ color: "red", marginBottom: "10px", textAlign: "center" }}>{error}</div>}
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    style={{ marginBottom: "10px", padding: "10px", fontSize: "16px", border: "1px solid #ccc", borderRadius: "4px" }}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    style={{ marginBottom: "10px", padding: "10px", fontSize: "16px", border: "1px solid #ccc", borderRadius: "4px" }}
-                /> <br />
-                <GoogleButton style={{ width: "100%" }} onClick={handleSignInWithGoogle} /> <br />
-                <button
-                    type="submit"
-                    style={{ padding: "10px", fontSize: "16px", backgroundColor: "#134074", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
-                >
-                    Login
-                </button>
-            </form>
+        <div className="always">
+            <section>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <div className="signin">
+                    <div className="content">
+                        <h2>Sign In</h2>
+                        <div className="form">
+                            <div className="inputBox">
+                                <input
+                                    type="text"
+                                    required
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                                <i>Username</i>
+                            </div>
+                            <div className="inputBox">
+                                <input
+                                    type="password"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <i>Password</i>
+                            </div>
+                            <div className="google">
+                                <FcGoogle onClick={handleSignInWithGoogle} />
+                            </div>
+                            <div className="inputBox">
+                                <input
+                                    type="submit"
+                                    value="Login"
+                                    onClick={handleLogin}
+                                />
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </section>
         </div>
     );
 };

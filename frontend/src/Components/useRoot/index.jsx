@@ -4,8 +4,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 const index = () => {
 
-    // const location = useLocation();
-    // const showNavbar = location.pathname !== '/';
+    const location = useLocation();
+    const showNavbar = location.pathname !== '/';
     // const showNavbar1 = location.pathname !== '/register';
 
 
@@ -14,9 +14,9 @@ const index = () => {
         <>
 
             <Outlet />
-            {/* {showNavbar && showNavbar1 && detail < Navbar />} */}
+            {showNavbar && < Navbar />}
 
-            <Navbar />
+            {/* <Navbar /> */}
             <Footer />
         </>
     );
