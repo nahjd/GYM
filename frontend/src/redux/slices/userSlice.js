@@ -17,6 +17,17 @@ export const getUserById = createAsyncThunk("getUserById", async (id) => {
   return response.data;
 });
 
+export const editProfile = createAsyncThunk(
+  "editProfile",
+  async ({ id, ...userData }) => {
+    const response = await axios.patch(
+      `https://short-1.onrender.com/bloom/${id}`,
+      userData
+    );
+    return response.data;
+  }
+);
+
 export const addUser = createAsyncThunk("addUser", async (newItem) => {
   try {
     const response = await axios.post(
@@ -31,19 +42,14 @@ export const addUser = createAsyncThunk("addUser", async (newItem) => {
 
 export const deleteUsers = createAsyncThunk("deleteUsers", async (id) => {
   try {
-    // Send DELETE request to remove user by ID
     await axios.delete(`https://short-1.onrender.com/bloom/${id}`);
 
-    // Fetch the updated list of users after deletion
     const response = await axios.get(`https://short-1.onrender.com/bloom`);
 
-    // Log the updated data (optional)
     console.log("Updated Data After Delete:", response.data);
 
-    // Return the updated user list
     return response.data;
   } catch (error) {
-    // Throw error with message for debugging
     throw new Error(`Failed to delete: ${error.message}`);
   }
 });
@@ -73,29 +79,29 @@ const userSlice = createSlice({
     login: null,
   },
   reducers: {
-    editProfile: (state, action) => {
-      const user = { ...action.payload };
-      console.log("action", user);
+    // editProfile: (state, action) => {
+    //   const user = { ...action.payload };
+    //   console.log("action", user);
 
-      axios.patch(`https://short-1.onrender.com/bloom${user._id}`, {
-        lastName: user.lastName,
-        firstName: user.firstName,
-        username: user.username,
-        email: user.email,
-        image: user.image,
-        price: user.price,
-        rate: user.rate,
-        description: user.description,
-      });
-      const array = state.users.map((elem) => {
-        if (elem._id == user._id) {
-          return user;
-        } else {
-          return elem;
-        }
-      });
-      state.users = array;
-    },
+    //   axios.patch(`https://short-1.onrender.com/bloom${user._id}`, {
+    //     lastName: user.lastName,
+    //     firstName: user.firstName,
+    //     username: user.username,
+    //     email: user.email,
+    //     image: user.image,
+    //     price: user.price,
+    //     rate: user.rate,
+    //     description: user.description,
+    //   });
+    //   const array = state.users.map((elem) => {
+    //     if (elem._id == user._id) {
+    //       return user;
+    //     } else {
+    //       return elem;
+    //     }
+    //   });
+    //   state.users = array;
+    // },
     addWishlist: (state, action) => {
       const found = state.wishlist.find(
         (item) => item._id === action.payload._id
@@ -163,7 +169,43 @@ const userSlice = createSlice({
         state.error = action.error.message;
         console.error("Error", action.error.message);
       });
+    builder
+      .addCase(getUserById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const userIndex = state.data.findIndex(
+          (user) => user._id === action.payload._id
+        );
+        if (userIndex !== -1) {
+          state.data[userIndex] = action.payload;
+        } else {
+          state.data.push(action.payload);
+        }
+      })
+      .addCase(getUserById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
 
+    builder
+      .addCase(editProfile.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(editProfile.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const userIndex = state.data.findIndex(
+          (user) => user._id === action.payload._id
+        );
+        if (userIndex !== -1) {
+          state.data[userIndex] = action.payload;
+        }
+      })
+      .addCase(editProfile.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
     builder
       .addCase(deleteUsers.pending, (state) => {
         state.status = "loading";
@@ -203,7 +245,7 @@ export const {
   increaseBasket,
   decreaseBasket,
   deleteBasket,
-  editProfile,
+  // editProfile,
 } = userSlice.actions;
 
 export default userSlice.reducer;

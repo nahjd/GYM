@@ -341,16 +341,18 @@ export default function Dashboard() {
                                                         <TableCell>{user.description}</TableCell>
                                                         <TableCell>{user.favourite}</TableCell>
                                                         <TableCell>{user.rate}</TableCell>
-                                                        {/* <TableCell><Link to={`/admin/edit/${user._id}`} style={{
+                                                        <TableCell><Link to={`/admin/edit/${user._id}`} style={{
                                                             color: "black",
                                                             border: "none",
                                                             padding: "10px",
                                                             borderRadius: "5px",
                                                             cursor: "pointer",
                                                             backgroundColor: "yellow",
+                                                            textDecoration: "none",
+
                                                         }}>
-                                                            Edit
-                                                        </Link></TableCell> */}
+                                                            <b>Edit</b>
+                                                        </Link></TableCell>
 
 
                                                         <TableCell>

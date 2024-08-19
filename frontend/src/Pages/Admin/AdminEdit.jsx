@@ -1,4 +1,3 @@
-// EditUser.js
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ export default function EditUser() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.gym);
+    const user = useSelector((state) => state.gym.data.find((u) => u._id === id)); // Ensure you're accessing the correct user data
     const [formData, setFormData] = useState({
         name: "",
         price: "",
