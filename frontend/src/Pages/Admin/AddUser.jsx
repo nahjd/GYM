@@ -72,14 +72,14 @@ const Drawer = styled(MuiDrawer, {
 
 const defaultTheme = createTheme();
 
-
 export default function AddUser() {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(true);
     const [username, setUsername] = React.useState("");
     const [name, setName] = React.useState("");
     const [price, setPrice] = React.useState("");
-    const [image, setImage] = React.useState("");
+    const [imageURL, setImageURL] = React.useState("");
+    const [imageFile, setImageFile] = React.useState(null);
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [description, setDescription] = React.useState("");
@@ -92,7 +92,7 @@ export default function AddUser() {
             username: username,
             name: name,
             price: price,
-            image: image,
+            image: imageFile ? URL.createObjectURL(imageFile) : imageURL,
             email: email,
             password: password,
             description: description,
@@ -104,12 +104,21 @@ export default function AddUser() {
         setUsername("");
         setName("");
         setPrice("");
-        setImage("");
+        setImageURL("");
+        setImageFile(null);
         setEmail("");
         setPassword("");
         setDescription("");
         setFavourite("");
         setRate("");
+    };
+
+    const handleFileChange = (e) => {
+        setImageFile(e.target.files[0]);
+    };
+
+    const handleImageURLChange = (e) => {
+        setImageURL(e.target.value);
     };
 
     return (
@@ -277,9 +286,15 @@ export default function AddUser() {
                                             <TextField
                                                 label="Image URL"
                                                 variant="outlined"
-                                                value={image}
-                                                onChange={(e) => setImage(e.target.value)}
+                                                value={imageURL}
+                                                onChange={handleImageURLChange}
                                                 fullWidth
+                                            />
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                                style={{ width: '100%' }}
                                             />
                                             <TextField
                                                 label="Email"
@@ -291,6 +306,7 @@ export default function AddUser() {
                                             <TextField
                                                 label="Password"
                                                 variant="outlined"
+                                                type="password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 fullWidth
