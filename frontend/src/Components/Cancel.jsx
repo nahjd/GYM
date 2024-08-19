@@ -7,7 +7,7 @@ const Cancel = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/');
+        navigate('/home');
     };
     return (
         <div className="alert-popup-container10">
@@ -18,11 +18,11 @@ const Cancel = () => {
                         <span className="icon-line line-diagonal-right"></span>
                     </div>
                 </div>
-                <div className="alert-popup-title">Cancelled</div>
-                <div className="alert-popup-message">
+                <div className="alert-popup-title1">Cancelled</div>
+                <div className="alert-popup-message1">
                     Your action was cancelled.
                 </div>
-                <div className="alert-popup-confirm">
+                <div className="alert-popup-confirm1">
                     <button onClick={handleClick}>OK</button>
                 </div>
             </div>

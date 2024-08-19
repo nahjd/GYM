@@ -86,19 +86,19 @@ const Basket = () => {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body),
-
         });
 
         const session = await response.json();
         console.log(session);
 
-        const result = stripe.redirectToCheckout({
+        const result = await stripe.redirectToCheckout({
             sessionId: session.id,
         });
         if (result.error) {
-            console.log(result.error);
+            console.error(result.error);
         }
     };
+
 
     if (loading) {
         return (
@@ -157,7 +157,7 @@ const Basket = () => {
                                 <th colSpan={2}>&nbsp;</th>
                                 <th>Items In Cart <span className='ml-2 mr-2'>:</span><span className='text-danger'>{totalQuantity}</span></th>
                                 <th className='text-right'>Total Price<span className='ml-2 mr-2'>:</span><span className='text-danger'>${totalPrice}</span></th>
-                                <th className='text-right'><button className='btn btn-success' onClick={makePayment}>Checkout</button></th>
+                                <th className='text-right'><button className='btn btn-success' onClick={makePayment} disabled={basket.length === 0}>Checkout</button></th>
                             </tr>
                         </tfoot>
                     </table>
