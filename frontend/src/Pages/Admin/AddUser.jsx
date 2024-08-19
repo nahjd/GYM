@@ -1,6 +1,8 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import GroupIcon from "@mui/icons-material/Group";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -24,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/slices/userSlice";
 
 const drawerWidth = 240;
+
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -73,6 +76,7 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function AddUser() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(true);
     const [username, setUsername] = React.useState("");
@@ -111,6 +115,8 @@ export default function AddUser() {
         setDescription("");
         setFavourite("");
         setRate("");
+
+        navigate("/admin/admin")
     };
 
     const handleFileChange = (e) => {
@@ -222,7 +228,7 @@ export default function AddUser() {
                                 }}
                             >
                                 <Link
-                                    to="/notification"
+                                    to="/admin/adminNot"
                                     style={{
                                         textDecoration: "none",
                                         color: "white",
@@ -332,13 +338,20 @@ export default function AddUser() {
                                                 onChange={(e) => setRate(e.target.value)}
                                                 fullWidth
                                             />
+
+
                                             <Button
+
                                                 variant="contained"
                                                 color="primary"
                                                 type="submit"
+
                                             >
                                                 Add User
+
                                             </Button>
+
+
                                         </div>
                                     </form>
                                 </Paper>

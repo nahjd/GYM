@@ -78,7 +78,8 @@ export default function EditUser() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.gym.data.find((u) => u._id === id)); // Ensure you're accessing the correct user data
+    const [open, setOpen] = useState(true);
+    const user = useSelector((state) => state.gym.data.find((u) => u._id === id));
     const [formData, setFormData] = useState({
         name: "",
         price: "",
@@ -128,9 +129,7 @@ export default function EditUser() {
         e.preventDefault();
         const updatedData = { ...formData };
         if (imageFile) {
-            // Handle file upload logic here if needed
-            // For example, you could upload the file to a server and update the image URL
-            // For now, just append the file to the updated data
+
             updatedData.image = URL.createObjectURL(imageFile);
         }
         dispatch(editProfile({ id, ...updatedData }))
@@ -221,7 +220,7 @@ export default function EditUser() {
                                 }}
                             >
                                 <Link
-                                    to="/admin/addUsers"
+                                    to="/admin/adminUsers"
                                     style={{
                                         textDecoration: "none",
                                         color: "white",
@@ -244,7 +243,7 @@ export default function EditUser() {
                                 }}
                             >
                                 <Link
-                                    to="/notification"
+                                    to="/admin/adminNot"
                                     style={{
                                         textDecoration: "none",
                                         color: "white",

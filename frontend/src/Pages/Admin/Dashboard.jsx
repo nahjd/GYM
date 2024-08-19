@@ -25,6 +25,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/slices/userSlice";
@@ -80,16 +84,18 @@ const defaultTheme = createTheme();
 export default function Dashboard() {
     const { data: users, loading, error } = useSelector((state) => state.gym);
     const dispatch = useDispatch();
-    const [searchh, setSearchh] = useState("");
+    const [search, setSearch] = useState("");
     const [showResults, setShowResults] = useState(false);
     const [open, setOpen] = useState(true);
+    const [openImage, setOpenImage] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
 
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch]);
 
     const filteredUsers = (users || []).filter((item) =>
-        item?.username?.toLowerCase().includes(searchh.toLowerCase())
+        item?.username?.toLowerCase().includes(search.toLowerCase())
     );
 
     const handleDelete = async (id) => {
@@ -109,7 +115,21 @@ export default function Dashboard() {
     useEffect(() => {
         console.log("Users data:", users);
         console.log("Filtered users:", filteredUsers);
-    }, [users, searchh]);
+    }, [users, search]);
+
+    const handleImageClick = (image) => {
+        if (image) {
+            setSelectedImage(image);
+            setOpenImage(true);
+        } else {
+            console.error("Invalid image URL:", image);
+        }
+    };
+
+    const handleCloseImage = () => {
+        setOpenImage(false);
+        setSelectedImage("");
+    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -133,10 +153,10 @@ export default function Dashboard() {
                             <input
                                 type="text"
                                 placeholder="Search by name"
-                                value={searchh}
+                                value={search}
                                 onChange={(e) => {
                                     const inputValue = e.target.value;
-                                    setSearchh(inputValue);
+                                    setSearch(inputValue);
                                     setShowResults(!!inputValue);
                                 }}
                                 style={{
@@ -158,41 +178,47 @@ export default function Dashboard() {
                                 }}
                             />
                         </div>
-                        <div
-                            style={{
-                                position: "absolute",
-                                top: "40px",
-                                right: "0",
-                                width: "20%",
-                                background: "white",
-                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                                color: "black",
-                                marginTop: "20px",
-                                display: showResults ? "block" : "none",
-                            }}
-                        >
-                            <ul>
-                                {filteredUsers.map((result, index) => (
-                                    <li key={index}
-                                        style={{
-                                            listStyleType: "none",
-                                            padding: "3px",
-                                            color: "black",
-                                            display: "flex",
-                                            gap: "10px",
-                                        }}
-                                    >
-                                        <SearchIcon />
-                                        <Link
-                                            to={`/${result.id}`}
-                                            style={{ color: "black", textDecoration: "none" }}
+                        {showResults && (
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    top: "40px",
+                                    right: "0",
+                                    width: "20%",
+                                    background: "white",
+                                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                                    color: "black",
+                                    marginTop: "20px",
+                                    zIndex: 1,
+                                }}
+                            >
+                                <ul>
+                                    {filteredUsers.length === 0 && search && (
+                                        <li>No results found</li>
+                                    )}
+                                    {filteredUsers.map((result, index) => (
+                                        <li key={index}
+                                            style={{
+                                                listStyleType: "none",
+                                                padding: "3px",
+                                                color: "black",
+                                                display: "flex",
+                                                gap: "10px",
+                                                cursor: "pointer",
+                                            }}
                                         >
-                                            {result.username}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                            <SearchIcon />
+                                            <Link
+                                                to={`/${result._id}`}
+                                                style={{ color: "black", textDecoration: "none" }}
+                                            >
+                                                {result.username}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
@@ -244,12 +270,12 @@ export default function Dashboard() {
                                 }}
                             >
                                 <Link
-                                    to="/admin/adminUsers"
                                     style={{
                                         textDecoration: "none",
                                         color: "white",
                                         display: "flex",
                                     }}
+                                    to="/admin/adminUsers"
                                 >
                                     <PersonAddAlt1Icon style={{ marginRight: "10px" }} />
                                     Add User
@@ -267,36 +293,34 @@ export default function Dashboard() {
                                 }}
                             >
                                 <Link
-                                    to="/admin/adminNot"
                                     style={{
                                         textDecoration: "none",
                                         color: "white",
                                         display: "flex",
                                     }}
+                                    to="/admin/adminNot"
                                 >
                                     <NotificationsNoneIcon style={{ marginRight: "10px" }} />
-                                    Notification
+                                    Notifications
                                 </Link>
                             </Typography>
                         </ListItem>
-                        <Divider sx={{ my: 1 }} />
                     </List>
                 </Drawer>
                 <Box
                     component="main"
                     sx={{
-                        backgroundColor: "#eaf4f4",
                         flexGrow: 1,
-                        height: "100vh",
-                        overflow: "auto",
+                        bgcolor: (theme) => theme.palette.background.default,
+                        p: 3,
                     }}
                 >
                     <Toolbar />
-                    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <Paper elevation={3} style={{ padding: "16px" }}>
-                                    <TableContainer component={Paper} style={{ height: "100vh" }}>
+                                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                                    <TableContainer>
                                         <Table>
                                             <TableHead>
                                                 <TableRow>
@@ -304,57 +328,54 @@ export default function Dashboard() {
                                                     <TableCell>Name</TableCell>
                                                     <TableCell>Price</TableCell>
                                                     <TableCell>Image</TableCell>
+                                                    <TableCell>Username</TableCell>
                                                     <TableCell>Email</TableCell>
                                                     <TableCell>Password</TableCell>
-                                                    <TableCell>Username</TableCell>
                                                     <TableCell>Description</TableCell>
-                                                    <TableCell>Favourite</TableCell>
+                                                    <TableCell>Favorite</TableCell>
                                                     <TableCell>Rate</TableCell>
                                                     <TableCell>Edit</TableCell>
-
                                                     <TableCell>Delete</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {users && users.map((user) => (
+                                                {filteredUsers.map((user) => (
                                                     <TableRow key={user._id}>
+
                                                         <TableCell>{user._id}</TableCell>
-                                                        <TableCell>
-                                                            <Link
-                                                                to={`/${user._id}`}
-                                                                style={{ color: "black", textDecoration: "none" }}
-                                                            >
-                                                                {user.name}
-                                                            </Link>
-                                                        </TableCell>
+                                                        <TableCell>{user.name}</TableCell>
                                                         <TableCell>{user.price}</TableCell>
-                                                        <TableCell>
+                                                        {user.image && (
                                                             <img
                                                                 src={user.image}
-                                                                alt={user.name}
-                                                                style={{ width: "100px", height: "auto", objectFit: "cover" }}
+                                                                alt={user.username}
+                                                                style={{ width: "100px", height: "auto", cursor: 'pointer' }}
+                                                                onClick={() => handleImageClick(user.image)}
                                                             />
-                                                        </TableCell>
+                                                        )}
+
+                                                        <TableCell>{user.username}</TableCell>
                                                         <TableCell>{user.email}</TableCell>
                                                         <TableCell>{user.password}</TableCell>
-                                                        <TableCell>{user.username}</TableCell>
                                                         <TableCell>{user.description}</TableCell>
                                                         <TableCell>{user.favourite}</TableCell>
                                                         <TableCell>{user.rate}</TableCell>
-                                                        <TableCell><Link to={`/admin/edit/${user._id}`} style={{
-                                                            color: "black",
-                                                            border: "none",
-                                                            padding: "10px",
-                                                            borderRadius: "5px",
-                                                            cursor: "pointer",
-                                                            backgroundColor: "yellow",
-                                                            textDecoration: "none",
-
-                                                        }}>
-                                                            <b>Edit</b>
-                                                        </Link></TableCell>
-
-
+                                                        <TableCell>
+                                                            <Link
+                                                                to={`/admin/edit/${user._id}`}
+                                                                style={{
+                                                                    color: "black",
+                                                                    border: "none",
+                                                                    padding: "10px",
+                                                                    borderRadius: "5px",
+                                                                    cursor: "pointer",
+                                                                    backgroundColor: "yellow",
+                                                                    textDecoration: "none",
+                                                                }}
+                                                            >
+                                                                <b>Edit</b>
+                                                            </Link>
+                                                        </TableCell>
                                                         <TableCell>
                                                             <button
                                                                 style={{
@@ -380,6 +401,28 @@ export default function Dashboard() {
                         </Grid>
                     </Container>
                 </Box>
+                <Dialog open={openImage} onClose={handleCloseImage}>
+                    <DialogContent>
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            onClick={handleCloseImage}
+                            aria-label="close"
+                            sx={{ position: "absolute", right: 0, top: -5 }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        {selectedImage ? (
+                            <img
+                                src={selectedImage}
+                                alt="Selected"
+                                style={{ width: "98%", height: "auto" }}
+                            />
+                        ) : (
+                            <p>No image selected</p>
+                        )}
+                    </DialogContent>
+                </Dialog>
             </Box>
         </ThemeProvider>
     );
