@@ -41,6 +41,7 @@ function Register() {
                 })
                 .then((res) => {
                     if (res.status === 201) {
+
                         Swal.fire({
                             title: "Registration Successful",
                             text: "You have been registered successfully!",
@@ -166,7 +167,7 @@ function Register() {
 
                 <div className="signout">
                     <div className="content">
-                        <h2>Sign Out</h2>
+                        <h2>Sign Up</h2>
                         <div className="form">
                             <form onSubmit={formik.handleSubmit}>
                                 <div className="inputBox">

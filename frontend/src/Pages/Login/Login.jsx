@@ -21,19 +21,18 @@ const Login = () => {
             const result = await signInWithPopup(auth, googleAuthProvider);
             const user = result.user;
 
-            // Kullanıcı bilgilerini console'a yazdır
+
             console.log("Google Sign-In Result: ", result);
             console.log("User Info: ", user);
 
-            // Token ve kullanıcı bilgilerini localStorage'a kaydet
+
             localStorage.setItem('token', user.accessToken);
             localStorage.setItem('user', JSON.stringify(user));
 
-            // Ana sayfaya yönlendir
             navigate("/home");
         } catch (err) {
-            console.log(err.message); // Hata mesajını konsola yazdır
-            setError("Google ile giriş yapılamadı. Lütfen tekrar deneyin."); // Kullanıcıya hata mesajı göster
+            console.log(err.message);
+            setError("Google ile giriş yapılamadı. Lütfen tekrar deneyin.");
         }
     };
 
@@ -41,18 +40,19 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // Backend'e giriş isteği gönder
+
             const response = await axios.post("http://localhost:3030/stella", {
                 username,
                 password,
             });
 
             if (response.status === 200) {
-                // Giriş başarılı, ana sayfaya yönlendir
+
+
                 navigate("/home");
             }
         } catch (err) {
-            // Hataları işleme (örneğin, yanlış bilgiler, sunucu sorunları)
+
             setError(err.response ? err.response.data : "Bir hata oluştu");
         }
     };
@@ -175,9 +175,9 @@ const Login = () => {
                                 />
                                 <i>Password</i>
                             </div>
-                            <div class="links">  <a href=""><Link to="/register">Sign up</Link></a>
+                            {/* <div class="links">  <a href=""><Link to="/register">Sign up</Link></a>
 
-                            </div>
+                        </div> */}
                             <div className="google">
 
                                 <SiFacebook style={{ color: "#1198F6", backgroundColor: "white", borderRadius: '50%' }} />
@@ -203,8 +203,8 @@ const Login = () => {
 
                 </div>
 
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

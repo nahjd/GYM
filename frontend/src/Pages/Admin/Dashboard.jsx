@@ -29,6 +29,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/slices/userSlice";
@@ -89,14 +92,22 @@ export default function Dashboard() {
     const [open, setOpen] = useState(true);
     const [openImage, setOpenImage] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
+    const [sortBy, setSortBy] = useState("none");
+    const [hover, setHover] = useState(false);
 
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch]);
 
-    const filteredUsers = (users || []).filter((item) =>
-        item?.username?.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredUsers = (users || [])
+        .filter((item) => item?.name?.toLowerCase().includes(search.toLowerCase()))
+        .sort((a, b) => {
+            if (sortBy === "priceAsc") return a.price - b.price;
+            if (sortBy === "priceDesc") return b.price - a.price;
+            if (sortBy === "nameAsc") return a.name.localeCompare(b.name);
+            if (sortBy === "nameDesc") return b.name.localeCompare(a.name);
+            return 0;
+        });
 
     const handleDelete = async (id) => {
         const previousUsers = [...users];
@@ -111,11 +122,6 @@ export default function Dashboard() {
             dispatch({ type: 'SET_USERS', payload: previousUsers });
         }
     };
-
-    useEffect(() => {
-        console.log("Users data:", users);
-        console.log("Filtered users:", filteredUsers);
-    }, [users, search]);
 
     const handleImageClick = (image) => {
         if (image) {
@@ -144,7 +150,7 @@ export default function Dashboard() {
                             onClick={() => setOpen(!open)}
                             sx={{ marginRight: "36px", ...(open && { display: "none" }) }}
                         >
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: "#134074" }} />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="black" noWrap sx={{ flexGrow: 1 }}>
                             Admin Panel
@@ -175,6 +181,7 @@ export default function Dashboard() {
                                     borderTopRightRadius: "5px",
                                     borderBottomRightRadius: "5px",
                                     height: "30px",
+                                    color: "white",
                                 }}
                             />
                         </div>
@@ -231,7 +238,7 @@ export default function Dashboard() {
                         }}
                     >
                         <IconButton onClick={() => setOpen(!open)}>
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: "#134074" }} />
                         </IconButton>
                     </Toolbar>
                     <Divider />
@@ -244,6 +251,9 @@ export default function Dashboard() {
                                     borderRadius: "7px",
                                     width: "100%",
                                     paddingLeft: "10px",
+                                    "&:hover": {
+                                        backgroundColor: "#002c77",
+                                    },
                                 }}
                             >
                                 <Link
@@ -254,7 +264,7 @@ export default function Dashboard() {
                                     }}
                                     to="/admin/admin"
                                 >
-                                    <GroupIcon style={{ marginRight: "10px" }} />
+                                    <GroupIcon style={{ marginRight: "10px", color: "white" }} />
                                     Users
                                 </Link>
                             </Typography>
@@ -267,6 +277,9 @@ export default function Dashboard() {
                                     borderRadius: "7px",
                                     width: "100%",
                                     paddingLeft: "10px",
+                                    "&:hover": {
+                                        backgroundColor: "#002c77",
+                                    },
                                 }}
                             >
                                 <Link
@@ -277,7 +290,7 @@ export default function Dashboard() {
                                     }}
                                     to="/admin/adminUsers"
                                 >
-                                    <PersonAddAlt1Icon style={{ marginRight: "10px" }} />
+                                    <PersonAddAlt1Icon style={{ marginRight: "10px", color: "white" }} />
                                     Add User
                                 </Link>
                             </Typography>
@@ -290,6 +303,9 @@ export default function Dashboard() {
                                     borderRadius: "7px",
                                     width: "100%",
                                     paddingLeft: "10px",
+                                    "&:hover": {
+                                        backgroundColor: "#002c77",
+                                    },
                                 }}
                             >
                                 <Link
@@ -300,7 +316,7 @@ export default function Dashboard() {
                                     }}
                                     to="/admin/adminNot"
                                 >
-                                    <NotificationsNoneIcon style={{ marginRight: "10px" }} />
+                                    <NotificationsNoneIcon style={{ marginRight: "10px", color: "white" }} />
                                     Notifications
                                 </Link>
                             </Typography>
@@ -325,12 +341,27 @@ export default function Dashboard() {
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell>#id</TableCell>
-                                                    <TableCell>Name</TableCell>
-                                                    <TableCell>Price</TableCell>
+                                                    <TableCell>
+                                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                                            Name
+                                                            <IconButton onClick={() => {
+                                                                setSortBy(sortBy === "nameAsc" ? "nameDesc" : "nameAsc");
+                                                            }}>
+                                                                {sortBy === "nameAsc" ? <ArrowUpwardIcon sx={{ color: "#134074" }} /> : <ArrowDownwardIcon sx={{ color: "#134074" }} />}
+                                                            </IconButton>
+                                                        </div>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                                            Price
+                                                            <IconButton onClick={() => {
+                                                                setSortBy(sortBy === "priceAsc" ? "priceDesc" : "priceAsc");
+                                                            }}>
+                                                                {sortBy === "priceAsc" ? <ArrowUpwardIcon sx={{ color: "#134074" }} /> : <ArrowDownwardIcon sx={{ color: "#134074" }} />}
+                                                            </IconButton>
+                                                        </div>
+                                                    </TableCell>
                                                     <TableCell>Image</TableCell>
-                                                    <TableCell>Username</TableCell>
-                                                    <TableCell>Email</TableCell>
-                                                    <TableCell>Password</TableCell>
                                                     <TableCell>Description</TableCell>
                                                     <TableCell>Favorite</TableCell>
                                                     <TableCell>Rate</TableCell>
@@ -341,54 +372,72 @@ export default function Dashboard() {
                                             <TableBody>
                                                 {filteredUsers.map((user) => (
                                                     <TableRow key={user._id}>
-
                                                         <TableCell>{user._id}</TableCell>
                                                         <TableCell>{user.name}</TableCell>
                                                         <TableCell>{user.price}</TableCell>
                                                         {user.image && (
-                                                            <img
-                                                                src={user.image}
-                                                                alt={user.username}
-                                                                style={{ width: "100px", height: "auto", cursor: 'pointer' }}
-                                                                onClick={() => handleImageClick(user.image)}
-                                                            />
+                                                            <TableCell>
+                                                                <img
+                                                                    src={user.image}
+                                                                    alt={user.username}
+                                                                    style={{ width: "100px", height: "auto", cursor: 'pointer' }}
+                                                                    onClick={() => handleImageClick(user.image)}
+                                                                />
+                                                            </TableCell>
                                                         )}
-
-                                                        <TableCell>{user.username}</TableCell>
-                                                        <TableCell>{user.email}</TableCell>
-                                                        <TableCell>{user.password}</TableCell>
                                                         <TableCell>{user.description}</TableCell>
                                                         <TableCell>{user.favourite}</TableCell>
                                                         <TableCell>{user.rate}</TableCell>
                                                         <TableCell>
                                                             <Link
                                                                 to={`/admin/edit/${user._id}`}
-                                                                style={{
-                                                                    color: "black",
-                                                                    border: "none",
-                                                                    padding: "10px",
-                                                                    borderRadius: "5px",
-                                                                    cursor: "pointer",
-                                                                    backgroundColor: "yellow",
-                                                                    textDecoration: "none",
-                                                                }}
+
+
+
+                                                                onMouseEnter={() => setHover(true)}
+                                                                onMouseLeave={() => setHover(false)}
                                                             >
-                                                                <b>Edit</b>
+                                                                <EditIcon style={{
+                                                                    width: '40px',
+                                                                    height: '40px',
+                                                                    fontSize: '15px',
+                                                                    border: 'none',
+                                                                    borderRadius: '5px',
+                                                                    color: hover ? 'yellow' : 'black',
+                                                                    backgroundColor: hover ? 'black' : 'white',
+                                                                    transition: 'color 0.3s',
+                                                                    cursor: 'pointer',
+                                                                    padding: '10px',
+                                                                    transition: '0.3s',
+                                                                }} />
+
+
+
+
+
                                                             </Link>
                                                         </TableCell>
                                                         <TableCell>
                                                             <button
                                                                 style={{
-                                                                    color: "white",
-                                                                    border: "none",
-                                                                    padding: "10px",
-                                                                    borderRadius: "5px",
-                                                                    cursor: "pointer",
-                                                                    backgroundColor: "#9A031E",
+                                                                    width: '40px',
+                                                                    height: '40px',
+                                                                    fontSize: '15px',
+                                                                    color: hover ? '#fff' : '#ff5b5c',
+                                                                    border: 'none',
+                                                                    borderRadius: '5px',
+                                                                    cursor: 'pointer',
+                                                                    backgroundColor: hover ? '#ff5b5c' : '#fde6e7',
+                                                                    padding: '10px',
+                                                                    transition: '0.3s',
                                                                 }}
+                                                                onMouseEnter={() => setHover(true)}
+                                                                onMouseLeave={() => setHover(false)}
+
                                                                 onClick={() => handleDelete(user._id)}
                                                             >
-                                                                Delete
+                                                                {/* <DeleteIcon /> */}
+                                                                <i className='fa fa-trash-alt'></i>
                                                             </button>
                                                         </TableCell>
                                                     </TableRow>
@@ -424,6 +473,6 @@ export default function Dashboard() {
                     </DialogContent>
                 </Dialog>
             </Box>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 }
