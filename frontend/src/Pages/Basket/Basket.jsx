@@ -135,7 +135,7 @@ const Basket = () => {
                                     </td>
                                     <td><div className='product-img'><img src={item.image} alt={item.name} /></div></td>
                                     <td><div className='product-name'><p>{item.name}</p></div></td>
-                                    <td>{item.price}</td>
+                                    <td>${item.price}</td>
                                     <td>
                                         <div className="prdct-qty-container">
                                             <button className='prdct-qty-btn' type='button' onClick={() => item.quantity > 1 ? dispatch(decreaseBasket(item)) : null}>

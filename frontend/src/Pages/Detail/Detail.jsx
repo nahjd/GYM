@@ -44,7 +44,7 @@ const Detail = () => {
                                 <img className='bir1' src={item.image} alt={item.name} />
                                 <div className="card-content1">
                                     <h5>{item.name}</h5>
-                                    <p>{item.price}</p>
+                                    <p>{item.price}$</p>
                                 </div>
                                 <div className="card-actions1">
                                     <div className="icons1">

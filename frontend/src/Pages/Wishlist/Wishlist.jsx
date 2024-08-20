@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { MdDelete } from "react-icons/md";
 import { MdOutlineFavorite } from "react-icons/md";
 import { FaShoppingBasket } from "react-icons/fa";
+import Footer from '../../Components/Footer/Footer';
 
 
 import "./Wishlist.scss"
@@ -35,22 +36,22 @@ const Wishlist = () => {
                                     <img className='bir' src={item.image} alt={item.name} />
                                     <div className="card-content">
                                         <h5>{item.name}</h5>
-                                        <p>{item.price}</p>
+                                        <p>{item.price}$</p>
                                     </div>
                                     <div className="card-actions">
                                         <div className='buttons'>
-                                            <button onClick={(e) => {
+                                            <button className='prdct-delete' onClick={(e) => {
                                                 e.stopPropagation();
                                                 dispatch(deleteWishlist(item));
                                             }}>
-                                                <MdDelete style={{ color: "red", fontSize: '25px' }} />
+                                                <i className='fa fa-trash-alt'></i>
                                             </button>
                                             <button onClick={(e) => {
                                                 e.stopPropagation();
 
                                                 dispatch(addBasket(item));
                                             }}>
-                                                <FaShoppingBasket style={{ color: "blue", fontSize: "25px" }} />
+                                                <FaShoppingBasket style={{ color: "blue", fontSize: "25px", transition: "0.3", width: "25px", height: "30px", borderRadius: "4px" }} />
                                             </button>
 
                                         </div>
@@ -63,6 +64,7 @@ const Wishlist = () => {
                 </div>
 
             </div>
+            {/* <Footer /> */}
 
         </>
     )

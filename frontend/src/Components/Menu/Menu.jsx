@@ -32,7 +32,7 @@ const Menu = () => {
                     <img className='bir' src={item.image} alt={item.name} />
                     <div className="card-content">
                         <h5>{item.name}</h5>
-                        <p>{item.price}</p>
+                        <p>{item.price} $</p>
                     </div>
                     <div className="card-actions">
                         <div className='buttons'>

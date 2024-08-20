@@ -10,11 +10,13 @@ const index = () => {
 
 
 
+
     return (
         <>
 
             <Outlet />
             {showNavbar && showNavbar1 && < Navbar />}
+
 
             {/* <Navbar /> */}
             <Footer />
