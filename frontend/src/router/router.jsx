@@ -73,7 +73,7 @@ export const routes = [
                 element: <AdminLogin />
             },
             {
-                path: "/admin/adminUsers",
+                path: "/admin/AddUser",
                 element: <AddUser />
             },
             {

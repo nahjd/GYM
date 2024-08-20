@@ -11,9 +11,9 @@ function Home() {
         <>
 
             <Hero />
-            <Menu />
-            <Video />
             <Blog />
+            <Video />
+            <Menu />
             <Timetable />
 
 

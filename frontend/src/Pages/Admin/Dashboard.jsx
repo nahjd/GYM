@@ -288,7 +288,7 @@ export default function Dashboard() {
                                         color: "white",
                                         display: "flex",
                                     }}
-                                    to="/admin/adminUsers"
+                                    to="/admin/AddUser"
                                 >
                                     <PersonAddAlt1Icon style={{ marginRight: "10px", color: "white" }} />
                                     Add User
@@ -354,9 +354,11 @@ export default function Dashboard() {
                                                     <TableCell>
                                                         <div style={{ display: "flex", alignItems: "center" }}>
                                                             Price
-                                                            <IconButton onClick={() => {
-                                                                setSortBy(sortBy === "priceAsc" ? "priceDesc" : "priceAsc");
-                                                            }}>
+                                                            <IconButton
+                                                                onClick={() => {
+                                                                    setSortBy(prevSort => prevSort === "priceAsc" ? "priceDesc" : "priceAsc");
+                                                                }}
+                                                            >
                                                                 {sortBy === "priceAsc" ? <ArrowUpwardIcon sx={{ color: "#134074" }} /> : <ArrowDownwardIcon sx={{ color: "#134074" }} />}
                                                             </IconButton>
                                                         </div>
@@ -374,7 +376,7 @@ export default function Dashboard() {
                                                     <TableRow key={user._id}>
                                                         <TableCell>{user._id}</TableCell>
                                                         <TableCell>{user.name}</TableCell>
-                                                        <TableCell>{user.price}</TableCell>
+                                                        <TableCell>{user.price}$</TableCell>
                                                         {user.image && (
                                                             <TableCell>
                                                                 <img
@@ -408,7 +410,7 @@ export default function Dashboard() {
                                                                     transition: 'color 0.3s',
                                                                     cursor: 'pointer',
                                                                     padding: '10px',
-                                                                    transition: '0.3s',
+
                                                                 }} />
 
 

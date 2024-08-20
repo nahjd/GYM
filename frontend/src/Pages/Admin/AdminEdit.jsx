@@ -84,9 +84,9 @@ export default function EditUser() {
         name: "",
         price: "",
         image: "",
-        email: "",
-        password: "",
-        username: "",
+        // email: "",
+        // password: "",
+        // username: "",
         description: "",
         favourite: "",
         rate: "",
@@ -103,9 +103,9 @@ export default function EditUser() {
                 name: user.name || "",
                 price: user.price || "",
                 image: user.image || "",
-                email: user.email || "",
-                password: user.password || "",
-                username: user.username || "",
+                // email: user.email || "",
+                // password: user.password || "",
+                // username: user.username || "",
                 description: user.description || "",
                 favourite: user.favourite || "",
                 rate: user.rate || "",
@@ -283,14 +283,14 @@ export default function EditUser() {
                                                 padding: "20px",
                                             }}
                                         >
-                                            <TextField
+                                            {/* <TextField
                                                 name="username"
                                                 label="Username"
                                                 variant="outlined"
                                                 value={formData.username}
                                                 onChange={handleChange}
                                                 fullWidth
-                                            />
+                                            /> */}
                                             <TextField
                                                 name="name"
                                                 label="Name"
@@ -321,7 +321,7 @@ export default function EditUser() {
                                                 onChange={handleFileChange}
                                                 style={{ width: '100%' }}
                                             />
-                                            <TextField
+                                            {/* <TextField
                                                 name="email"
                                                 label="Email"
                                                 variant="outlined"
@@ -337,7 +337,7 @@ export default function EditUser() {
                                                 value={formData.password}
                                                 onChange={handleChange}
                                                 fullWidth
-                                            />
+                                            /> */}
                                             <TextField
                                                 name="description"
                                                 label="Description"
