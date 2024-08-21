@@ -9,8 +9,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  // border: 1px solid black;
 }
+
 .count-badge {
   background-color: red;
   color: white;
@@ -28,18 +28,16 @@
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
-  position: absolute;
+  position: fixed;
   z-index: 5;
   top: 0;
   gap: 35px;
   padding: 10px;
-  //   background-color: gray;
-  // border: 1px solid red;
 
   .leftnav {
     .logo {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -48,6 +46,14 @@
     font-size: 2rem;
     cursor: pointer;
     color: white;
+    transition: opacity 0.3s ease-in-out;
+  }
+  :hover {
+    color: white;
+  }
+
+  .menu-icon.hide {
+    opacity: 0;
   }
 
   .nav-links {
@@ -70,18 +76,6 @@
         border-bottom: 5px solid yellow;
         animation: slideIn 2s infinite;
       }
-
-      // @keyframes slideIn {
-      //   0% {
-      //     transform: translateX(-50%);
-      //   }
-      //   50% {
-      //     transform: translateX(0);
-      //   }
-      //   100% {
-      //     transform: translateX(50%);
-      //   }
-      // }
     }
   }
 
@@ -94,8 +88,6 @@
 
   @media (max-width: 630px) {
     .menu-icon {
-      // background-color: black;
-      color: white;
       display: block;
       position: absolute;
       top: 0px;
@@ -136,7 +128,7 @@
         text-align: center;
 
         a {
-          color: black; // Menü link renkleri
+          color: black;
         }
       }
     }

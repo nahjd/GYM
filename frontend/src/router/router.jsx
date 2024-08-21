@@ -15,6 +15,8 @@ import Register from "../Pages/Register/Register"
 import AdminLogin from "../Pages/Admin/AdminLogin"
 import Success from "../Components/Success"
 import Cancel from "../Components/Cancel"
+import Video from "../Components/video/Video"
+import Menu from "../Components/Menu/Menu"
 
 export const routes = [
     {
@@ -36,6 +38,14 @@ export const routes = [
             {
                 path: "/blog",
                 element: <Blog />
+            },
+            {
+                path: "/video",
+                element: <Video />
+            },
+            {
+                path: "/shop",
+                element: <Menu />
             },
 
             {

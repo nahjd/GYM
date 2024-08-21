@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Video.scss';
 import video from './../../../images/Cinematic Fitness Video (Featuring DVTraining).mp4';
 import { IoIosPlayCircle } from "react-icons/io";
+import Timetable from '../Timetable/Timetable';
 
 const Video = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -34,8 +35,12 @@ const Video = () => {
                     </video>
                 </div>
             </div>
+            <Timetable />
         </div>
     );
+
 }
+
+
 
 export default Video;
