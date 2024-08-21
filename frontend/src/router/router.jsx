@@ -51,7 +51,7 @@ export const routes = [
                 element: <Detail />
             },
             {
-                path: "/Success",
+                path: "/success",
                 element: <Success />
             },
             {
