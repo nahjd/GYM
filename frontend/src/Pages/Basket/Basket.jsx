@@ -82,7 +82,7 @@ const Basket = () => {
         const headers = {
             "Content-Type": "application/json",
         };
-        const response = await fetch("http://localhost:3030/create-checkout-session", {
+        const response = await fetch("https://short-upy5.onrender.com/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body),

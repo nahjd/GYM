@@ -40,7 +40,7 @@ const Wishlist = () => {
                                     </div>
                                     <div className="card-actions">
                                         <div className='buttons'>
-                                            <button className='prdct-delete' onClick={(e) => {
+                                            <button className='prdct-deletew' onClick={(e) => {
                                                 e.stopPropagation();
                                                 dispatch(deleteWishlist(item));
                                             }}>
