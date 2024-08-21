@@ -115,10 +115,11 @@ button:hover {
 @media screen and (max-width: 630px) {
   .text1 {
     // border: 1px solid red;
+    margin-top: 15%;
     text-align: center;
     width: 100%;
     h1 {
-      font-size: 40px;
+      font-size: 34px;
     }
     button {
       font-size: 11px;
@@ -136,7 +137,8 @@ button:hover {
       text-align: center;
       // border: 10px solid red;
       width: 100%;
-      font-size: 15px;
+      font-size: 11px;
+      margin-top: 26%;
       button {
         font-size: 10px;
         padding: 10px;
