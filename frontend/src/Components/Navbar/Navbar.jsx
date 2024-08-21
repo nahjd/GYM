@@ -26,6 +26,7 @@ function Navbar() {
 
                 </div>
                 <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+
                     <li>
 
                         <ScrollLink
@@ -34,7 +35,8 @@ function Navbar() {
                             duration={500}
                             offset={-70}
                         >
-                            HOME
+                            <Link to="/home">HOME</Link>
+
                         </ScrollLink>
 
 
