@@ -35,7 +35,7 @@ const Video = () => {
                     </video>
                 </div>
             </div>
-            <Timetable />
+
         </div>
     );
 
